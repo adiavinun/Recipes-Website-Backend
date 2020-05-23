@@ -4,11 +4,7 @@ const DButils = require("../modules/DButils");
 const bcrypt = require("bcrypt");
 const { RegisterValidationRules, validate } = require("../modules/validator");
 
-router.post(
-  "/Register",
-  RegisterValidationRules,
-  validate,
-  async (req, res, next) => {
+router.post("/Register",RegisterValidationRules,validate,async (req, res, next) => {
     try {
       // parameters exists
       // valid parameters
