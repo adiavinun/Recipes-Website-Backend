@@ -5,6 +5,9 @@ var path = require("path");
 var logger = require("morgan");
 const session = require("client-sessions");
 const DButils = require("./routes/utils/DButils");
+const cors = require("cors");
+app.use(cors());
+
 
 var app = express();
 app.use(logger("dev")); //logger

@@ -2,7 +2,7 @@ CREATE TABLE [dbo].[recipes](
 	[recipe_id] [UNIQUEIDENTIFIER] NOT NULL default NEWID(),
 	[author] [UNIQUEIDENTIFIER] NOT NULL,
 	[recipeName] [varchar](300) NOT NULL,
-	[urlOfProfilePic] [varchar](300) NOT NULL,
+	[urlPic] [varchar](300) NOT NULL,
 	[prepTime] [varchar](300) NOT NULL,
 	[isVegan] [BIT](1) NOT NULL,
 	[isVegetarian] [BIT](1) NOT NULL,
