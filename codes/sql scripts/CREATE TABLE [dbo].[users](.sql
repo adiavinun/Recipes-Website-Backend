@@ -6,6 +6,6 @@ CREATE TABLE [dbo].[users](
 	[lastname] [varchar] (300) NOT NULL,
 	[country] [varchar] (300) NOT NULL,
 	[email] [varchar] (300) NOT NULL,
-	[urlOfProfilePic] [varchar] (300) NOT NULL,
+	[urlPic] [varchar] (300) NOT NULL
 )
 
