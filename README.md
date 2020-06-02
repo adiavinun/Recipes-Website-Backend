@@ -1,6 +1,2 @@
-# LAB9
-
-middlewares
-
-auth middlewares
+# Assignment 3.2
 
