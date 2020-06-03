@@ -52,7 +52,7 @@ router.get("/search", async (req, res, next) => {
         intolerances: intolerances,
         number: number,
         instructionsRequired: true,
-        apiKey: process.env.spooncular_apiKey
+        apiKey: "25f5d3453750479f9213ccf1db014d32"
       }
     });
     let recipes = await Promise.all(
@@ -71,7 +71,7 @@ function getRecipeInfo(id) {
   return axios.get(`${api_domain}/${id}/information`, {
     params: {
       includeNutrition: false,
-      apiKey: process.env.spooncular_apiKey
+      apiKey: "25f5d3453750479f9213ccf1db014d32"
     }
   });
 }
