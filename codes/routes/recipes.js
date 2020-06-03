@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 //nicole 03/06/2020
 //adiiiiii 3/6/2020
-=======
-//nicole 03/06/2020 17:49
->>>>>>> c86b0f612b99dd9d35fd68dccf94bc7d6487943d
 var express = require("express");
 var router = express.Router();
 
