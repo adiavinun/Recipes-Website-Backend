@@ -11,6 +11,8 @@ function extractQueriesPram (query_params, search_params){
     });
 }
 
+
+
 async function searchForRecipes(searchQuery, num, search_params){
     let search_response = await axios.get(
         '${recipes_api_url}/search?${api_key}',

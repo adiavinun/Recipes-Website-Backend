@@ -9,3 +9,7 @@ CREATE TABLE [dbo].[users](
 	[urlPic] [varchar] (300) NOT NULL
 )
 
+CREATE TABLE [dbo].[lastSeen](
+	[recipe_id] [varchar] (300) NOT NULL default NEWID(),
+	[author] [UNIQUEIDENTIFIER] NOT NULL,
+)
