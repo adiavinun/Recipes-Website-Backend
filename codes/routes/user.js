@@ -13,6 +13,7 @@ router.use((req, res, next) => {
       )
     )[0];
 
+
     if(user){
       req.user = user;
       next();
