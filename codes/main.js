@@ -31,8 +31,8 @@ const auth = require("./routes/auth");
 
 app.get("/", (req, res) => res.send("welcome"));
 
-//app.use("/user", user);
-//app.use("/recipes", recipes);
+app.use("/user", user);
+app.use("/recipes", recipes);
 app.use(auth)
 
 app.use(function (err, req, res, next) {
