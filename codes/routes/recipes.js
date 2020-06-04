@@ -1,16 +1,16 @@
-//nicole 03/06/2020 17:55  
-//nicole 03/06/2020
-//adiiiiii 3/6/2020
-//test
-//nicole 03/06/2020 17:55
-var express = require("express");
-var router = express.Router();
+//var express = require("express");
+//var router = express.Router();
 
-
-/**********************SHIR************************
- *****/  
+/**********************SHIR*****************************/  
+const express = require("express");
+const router = express.Router();
 
 const search_util = require("./utils/search_recipes.js");
+
+router.use((req, res, nwxt) => {
+  console.log("Recipes routs");
+  next();
+});
 
 router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   const {searchQuery, num} = req.params;
