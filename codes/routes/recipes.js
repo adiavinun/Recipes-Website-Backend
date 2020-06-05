@@ -2,7 +2,17 @@ var express = require("express");
 var router = express.Router();
 const search_util = require("../routes/utils/search_recipes");
 
+<<<<<<< HEAD
 router.use((req, res, next) => {
+=======
+
+<<<<<<< HEAD
+/**********************SHIR*****************************/  
+=======
+>>>>>>> 9deea29357e7b5e080432536331811edb8735b61
+
+router.use((req, res, nwxt) => {
+>>>>>>> 21400fe25de22c276020d1f090a937ba4643f775
   console.log("Recipes routs");
   next();
 });
