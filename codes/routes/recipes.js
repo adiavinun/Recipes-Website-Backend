@@ -1,10 +1,19 @@
 var express = require("express");
 var router = express.Router();
-
-
-/**********************SHIR*****************************/  
-
+const axios = require("axios");
 const search_util = require("./utils/search_recipes.js");
+const api_domain = "https://api.spoonacular.com/recipes";
+
+
+<<<<<<< HEAD
+/**********************SHIR*****************************/  
+=======
+>>>>>>> 9deea29357e7b5e080432536331811edb8735b61
+
+router.use((req, res, nwxt) => {
+  console.log("Recipes routs");
+  next();
+});
 
 router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   const {searchQuery, num} = req.params;
@@ -14,8 +23,10 @@ router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   search_params.instructionsRequired = true;
   
   //check if queries params exist
-  search_util.extractQueriesParams(req.query, search_params);
-
+  search_util.extractQueriesParams(req.query, search_params).catch(function (error) {
+    next(error);
+  });
+  
   search_util
     .searchForRecipes(searchQuery, num, search_params)
     .then((info_array) => res.send(info_array))
