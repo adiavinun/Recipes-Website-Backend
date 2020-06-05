@@ -1,1 +1,1 @@
-DROP TABLE dbo.users
+DROP TABLE dbo.personalRecipes

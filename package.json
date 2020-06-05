@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node codes/solution/main.js"
+    "start": "node codes/main.js"
   },
   "keywords": [],
   "author": "Adi_Nicole",
