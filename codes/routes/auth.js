@@ -8,7 +8,7 @@ router.post("/register", async (req, res, next) => {
       const users = await DButils.execQuery("SELECT username FROM dbo.users");
 
       if (users.find((x) => x.username === req.body.username))
-        throw { status: 409, message: "Username taken" };
+        throw { status: 409, message: "username already exists" };
 
       // add the new username
       let hash_password = bcrypt.hashSync(

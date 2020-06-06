@@ -110,9 +110,11 @@ CREATE TABLE [dbo].[lastSeen](
 	PRIMARY KEY (recipe_id, author),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
-Insert into lastSeen (recipe_id, author) values (98321, '9b6c41d7-009e-4994-801e-18a8bf440951');
-Insert into lastSeen (recipe_id, author) values (5426, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
-Insert into lastSeen (recipe_id, author) values (3453, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+SELECT * FROM favoriteRecipes
+Insert into lastSeen (recipe_id, author) values (630293, '9b6c41d7-009e-4994-801e-18a8bf440951');
+Insert into lastSeen (recipe_id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into lastSeen (recipe_id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into lastSeen (recipe_id, author) values (492560, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
 
 CREATE TABLE [dbo].[favoriteRecipes](
 	[recipe_id] [varchar] (300) NOT NULL,
@@ -120,6 +122,6 @@ CREATE TABLE [dbo].[favoriteRecipes](
 	PRIMARY KEY (recipe_id, author),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
-Insert into favoriteRecipes (recipe_id, author) values (987646, '9b6c41d7-009e-4994-801e-18a8bf440951');
-Insert into favoriteRecipes (recipe_id, author) values (12324354, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
-Insert into favoriteRecipes (recipe_id, author) values (5423, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into favoriteRecipes (recipe_id, author) values (492560, '9b6c41d7-009e-4994-801e-18a8bf440951');
+Insert into favoriteRecipes (recipe_id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into favoriteRecipes (recipe_id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
