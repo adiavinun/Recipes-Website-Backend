@@ -15,7 +15,6 @@ function extractQueriesPram (query_params, search_params){
     console.log(search_params);
 }
 
-<<<<<<< HEAD
 async function searchForRecipes(searchQuery, num, search_params) {
     let search_response = await axios.get(`${api_domain}/search?${api_key}`,
         {
@@ -28,21 +27,6 @@ async function searchForRecipes(searchQuery, num, search_params) {
     let info_array = await getRecipesInfo(recipes_id_list);
     return info_array;
 }
-=======
-// async function searchForRecipes(searchQuery, num, search_params){
-//     let search_response = await axios.get
-//         `${api_domain}/search?apiKey=${api_key}`,
-//     {
-//         params: search_params,
-//     }
-
-//     const recipes_id_list = extractSearchResultsIds(search_response);
-//     console.log(recipes_id_list);
-//     //get recipe info by id
-//     let info_array = await getRecipesInfo(recipes_id_list);
-//     return info_array;
-// }
->>>>>>> 647812a9741a65733c87af51ca4d28e0439dc1d9
 
 async function searchForRandom(search_params){
     let search_response = await axios.get(`${api_url}/random?${api_key}`,
@@ -118,7 +102,6 @@ function extractSearchResultsIds(search_response){
     return recipes_id_list;
 }
 
-<<<<<<< HEAD
 function extractRandomSearchResultsIds(search_response){
     let recipes = search_response.data.recipes;
     recipes_id_list = [];
@@ -126,14 +109,7 @@ function extractRandomSearchResultsIds(search_response){
         recipes_id_list.push(recipe.id);
     });
     return recipes_id_list;
-=======
-module.exports ={
-    //searchForRecipes: searchForRecipes,
-    //extractQueriesPram = extractQueriesPram,
-    getRecipesInfo: getRecipesInfo,
->>>>>>> 647812a9741a65733c87af51ca4d28e0439dc1d9
 }
-
 
 router.get("/search", async (req, res, next) => {
     try {
