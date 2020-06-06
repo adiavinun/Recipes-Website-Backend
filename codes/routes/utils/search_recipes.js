@@ -29,7 +29,7 @@ async function searchForRecipes(searchQuery, num, search_params) {
 }
 
 async function searchForRandom(search_params){
-    let search_response = await axios.get(`${api_url}/random?${api_key}`,
+    let search_response = await axios.get(`${api_domain}/random?${api_key}`,
         {
             params: search_params,
         }
@@ -149,9 +149,102 @@ router.get("/search", async (req, res, next) => {
     }
   });
 
+  async function getFullRecipeInfo(recipes_ids){
+    let promises = [];
+    recipes_ids.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
+    let info_response1 = await Promise.all(promises);
+    relevantRecipes = extractSearchResultsData_fullRecipe(info_response1);
+    return relevantRecipes;
+}
+
+function extractSearchResultsData_fullRecipe(recipes_Info){
+    return recipes_Info.map((record) => {
+        const {
+            id,
+            title,
+            readyInMinutes,
+            aggregateLikes,
+            vegetarian,
+            vegan,
+            glutenFree,
+            image,
+            extendedIngredients,
+            instructions,
+            servings,
+        } = record.data;
+        return {
+            id: id,
+            title: title,
+            readyInMinutes: readyInMinutes,
+            aggregateLikes: aggregateLikes,
+            vegetarian: vegetarian,
+            vegan: vegan,
+            glutenFree: glutenFree,
+            image: image,
+            Ingredients: getIngrediants(extendedIngredients),//לא מציג טוב לבדוק איך למשוך את הדברים הרלוונטים שצריך
+            instructions: instructions,
+            servings: servings,
+        };
+    });
+}
+
+function getIngrediants(extendedIngredients){
+    return extendedIngredients.map((ingredients) => {
+        const {
+            name,
+            amount,
+            unit,
+        } = ingredients;
+        return {
+            name: name,
+            amount: amount,
+            unit: unit,           
+        };
+    });
+}
+
+
+async function getPreviewRecipeInfo(recipes_ids){
+    let promises = [];
+    recipes_ids.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
+    let info_response1 = await Promise.all(promises);
+    relevantRecipes = extractSearchResultsData_PreviewRecipe(info_response1);
+    return relevantRecipes;
+}
+
+function extractSearchResultsData_PreviewRecipe(recipes_Info){
+    return recipes_Info.map((record) => {
+        const {
+            id,
+            title,
+            readyInMinutes,
+            aggregateLikes,
+            vegetarian,
+            vegan,
+            glutenFree,
+            image,
+            
+        } = record.data;
+        return {
+            id: id,
+            title: title,
+            readyInMinutes: readyInMinutes,
+            aggregateLikes: aggregateLikes,
+            vegetarian: vegetarian,
+            vegan: vegan,
+            glutenFree: glutenFree,
+            image: image,
+            
+        };
+    });
+}
+
+
   //getRecipesInfo([492560,559251,630293]).then(console.log);
 
   exports.searchForRecipes = searchForRecipes;
   exports.searchForRandom = searchForRandom;
   exports.extractQueriesPram = extractQueriesPram;
   exports.getRecipesInfo = getRecipesInfo;
+  exports.getFullRecipeInfo = getFullRecipeInfo;
+  exports.getPreviewRecipeInfo = getPreviewRecipeInfo;
