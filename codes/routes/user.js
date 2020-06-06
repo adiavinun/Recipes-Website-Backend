@@ -22,7 +22,7 @@ router.use(async (req, res, next) => {
   else res.sendStatus(401);
 });
 
-//checked!
+//checked
 router.get("/recipeInfo/:ids", async (req, res) => {
   try {
     const idArray = JSON.parse(req.params.ids);
@@ -40,7 +40,7 @@ router.get("/recipeInfo/:ids", async (req, res) => {
 router.get("/last3SeenRecipes", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
-    const lastSeenRecipeID = await user_utils.getLast3SeenRecipes(user_id);
+    const lastSeenRecipeID = await userUtils.getLast3SeenRecipes(user_id);
     const lastSeenRecipeInfo = await recipeUtils.getRecipesInfo(lastSeenRecipeID);
     res.send(lastSeenRecipeInfo);
   } catch (error) {
@@ -48,17 +48,55 @@ router.get("/last3SeenRecipes", async (req, res, next) => {
   }
 })
 
-router.get("/myRecipes", async (req, res, next) => {
+//checked
+router.get("/myPersonalRecipesPreview", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
-    const lastSeenRecipeID = await user_utils.getLast3SeenRecipes(user_id);
-    const lastSeenRecipeInfo = await recipeUtils.getRecipesInfo(lastSeenRecipeID);
-    res.send(lastSeenRecipeInfo);
+    const recipeInfo = await userUtils.getMyPersonalRecipesPreview(user_id);
+    res.send(recipeInfo);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 })
 
+//checked
+router.get("/myPersonalRecipeFull/:id", async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    const recipe_id =  req.params.id;
+    const recipeInfo = await userUtils.getMyPersonalRecipeFull(user_id, recipe_id);
+    res.send(recipeInfo);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+})
+
+//need to check
+router.get("/myFavRecipes", async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    const myFavRecipesID = await userUtils.getMyFavRecipesID(user_id);
+    const myFavRecipesInfo = await recipeUtils.getRecipesInfo(myFavRecipesID);
+    res.send(myFavRecipesInfo);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+})
+
+//checked
+router.get("/myFamilyRecipes", async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    const myFamilyRecipes = await userUtils.getMyFamilyRecipes(user_id);
+    res.send(myFamilyRecipes);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+})
 
 
 module.exports = router;

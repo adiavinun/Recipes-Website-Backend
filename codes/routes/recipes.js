@@ -5,10 +5,6 @@ const search_util = require("./utils/search_recipes.js");
 const api_domain = "https://api.spoonacular.com/recipes";
 
 
-<<<<<<< HEAD
-/**********************SHIR*****************************/  
-=======
->>>>>>> 9deea29357e7b5e080432536331811edb8735b61
 
 router.use((req, res, nwxt) => {
   console.log("Recipes routs");
@@ -41,7 +37,6 @@ module.exports = router;
 /********************************************************/
 
 /*********************ERAN******************************/
-const axios = require("axios");
 
 router.get("/Information", async (req, res, next) => {
   try {

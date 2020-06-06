@@ -15,19 +15,19 @@ function extractQueriesPram (query_params, search_params){
     console.log(search_param);
 }
 
-async function searchForRecipes(searchQuery, num, search_params){
-    let search_response = await axios.get
-        `${api_domain}/search?apiKey=${api_key}`,
-    {
-        params: search_params,
-    }
+// async function searchForRecipes(searchQuery, num, search_params){
+//     let search_response = await axios.get
+//         `${api_domain}/search?apiKey=${api_key}`,
+//     {
+//         params: search_params,
+//     }
 
-    const recipes_id_list = extractSearchResultsIds(search_response);
-    console.log(recipes_id_list);
-    //get recipe info by id
-    let info_array = await getRecipesInfo(recipes_id_list);
-    return info_array;
-}
+//     const recipes_id_list = extractSearchResultsIds(search_response);
+//     console.log(recipes_id_list);
+//     //get recipe info by id
+//     let info_array = await getRecipesInfo(recipes_id_list);
+//     return info_array;
+// }
 
 //עבור כל מזהה שנקבל נרוץ עליו ונכין מערך של פרמיס עבור כל מזהה. נחכה שנסיים עם הכל ונחזיר את התשובות
 async function getRecipesInfo(recipes_id_list){
@@ -85,7 +85,7 @@ function extractSearchResultsIds(search_response){
 }
 
 module.exports ={
-    searchForRecipes: searchForRecipes,
-    extractQueriesPram = extractQueriesPram,
+    //searchForRecipes: searchForRecipes,
+    //extractQueriesPram = extractQueriesPram,
     getRecipesInfo: getRecipesInfo,
 }
