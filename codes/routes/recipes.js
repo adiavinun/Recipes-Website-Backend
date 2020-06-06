@@ -9,6 +9,8 @@ const search_util = require("../routes/utils/search_recipes");
   });*/
 
   
+
+
 router.use((req, res, next) => {
   console.log("Recipes routs");
   next();
@@ -83,7 +85,10 @@ module.exports = router;
 /********************************************************/
 
 /*********************ERAN******************************/
+<<<<<<< HEAD
 /*
+=======
+>>>>>>> 647812a9741a65733c87af51ca4d28e0439dc1d9
 
 router.get("/Information", async (req, res, next) => {
   try {
