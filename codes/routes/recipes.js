@@ -8,8 +8,6 @@ const search_util = require("../routes/utils/search_recipes");
   res.send(res124);
   });*/
 
-  
-
 
 router.use((req, res, next) => {
   console.log("Recipes routs");
@@ -102,56 +100,3 @@ module.exports = router;
 
 /********************************************************/
 
-/*********************ERAN******************************/
-<<<<<<< HEAD
-/*
-=======
->>>>>>> 1dd94b3ce07c4b36611a6b006142f1dadae5d5bd
-
-router.get("/Information", async (req, res, next) => {
-  try {
-    const recipe = await getRecipeInfo(req.query.recipe_id);
-    res.send({ data: recipe.data });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/search", async (req, res, next) => {
-  try {
-    const { query, cuisine, diet, intolerances, number } = req.query;
-    const search_response = await axios.get(`${api_domain}/search`, {
-      params: {
-        query: query,
-        cuisine: cuisine,
-        diet: diet,
-        intolerances: intolerances,
-        number: number,
-        instructionsRequired: true,
-        apiKey: "25f5d3453750479f9213ccf1db014d32"
-      }
-    });
-    let recipes = await Promise.all(
-      search_response.data.results.map((recipe_raw) =>
-        getRecipeInfo(recipe_raw.id)
-      )
-    );
-    recipes = recipes.map((recipe) => recipe.data);
-    res.send({ data: recipes });
-  } catch (error) {
-    next(error);
-  }
-});
-
-function getRecipeInfo(id) {
-  return axios.get(`${api_domain}/${id}/information`, {
-    params: {
-      includeNutrition: false,
-      apiKey: "25f5d3453750479f9213ccf1db014d32"
-    }
-  });
-}
-
-module.exports = router;
-
-/***********************************************************/
