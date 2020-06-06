@@ -94,7 +94,7 @@ router.get("/fullRecipeInfo/id/:id", (req, res) => {
     });
 });
 
-router.get("/previewRecipeInfo/query/:ids", (req, res) => {
+router.get("/previewRecipeInfo/ids/:ids", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;

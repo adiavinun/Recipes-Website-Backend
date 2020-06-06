@@ -32,7 +32,7 @@ async function searchForRecipes(searchQuery, num, search_params) {
 }
 
 async function searchForRandom(search_params){
-    let cpunter = 0;
+    let counter = 0;
     let search_response;
     while(counter < 3){
         search_response = await axios.get(`${api_domain}/random?${api_key}`,
@@ -41,8 +41,8 @@ async function searchForRandom(search_params){
         }
         );
         counter = 0;
-        for(let i=0; i<searchResponse.data.recipes.length; i++){
-            if(searchResponse.data.recipes[i].analyzedInstructions.length > 0)
+        for(let i=0; i<search_response.data.recipes.length; i++){
+            if(search_response.data.recipes[i].analyzedInstructions.length > 0)
                 counter ++; 
         }
     }
@@ -68,7 +68,7 @@ async function getRecipesInfo(recipes_id_list){
    return relevantRecipesData; 
 }
 
-
+/*
 async function promiseAll(func, param_list){
     let promises = [];
     param_list.map((param) => promises.push(func(param)));
@@ -76,7 +76,7 @@ async function promiseAll(func, param_list){
 
     return info_response;
 }
-
+*/
 
 router.get("/search", async (req, res, next) => {
     try {
@@ -118,11 +118,19 @@ router.get("/search", async (req, res, next) => {
 
 async function getFullRecipeInfo(recipes_ids){
     let promises = [];
+    //full = false;
     recipes_ids.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
     let info_response1 = await Promise.all(promises);
+    /*while( !full ){
+        recipes_ids.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
+        let info_response1 = await Promise.all(promises);
+        if(promises.length >0) //לבדוק את זה שוב
+            full = true;    
+    }*/
     relevantRecipes = extractSearchResultsData_fullRecipe(info_response1);
     return relevantRecipes;
 }
+
 
 function getIngrediants(extendedIngredients){
     return extendedIngredients.map((ingredients) => {
