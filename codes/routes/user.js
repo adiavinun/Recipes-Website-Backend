@@ -22,7 +22,6 @@ router.use(async (req, res, next) => {
   else res.sendStatus(401);
 });
 
-//checked
 router.get("/recipeInfo/:ids", async (req, res) => {
   try {
     const idArray = JSON.parse(req.params.ids);
@@ -35,20 +34,8 @@ router.get("/recipeInfo/:ids", async (req, res) => {
   }
 })
 
+/********************PERSONAL RECIPES**********************************************/
 
-//need to check
-router.get("/last3SeenRecipes", async (req, res, next) => {
-  try {
-    const user_id = req.user.user_id;
-    const lastSeenRecipeID = await userUtils.getLast3SeenRecipes(user_id);
-    const lastSeenRecipeInfo = await recipeUtils.getRecipesInfo(lastSeenRecipeID);
-    res.send(lastSeenRecipeInfo);
-  } catch (error) {
-    next(error);
-  }
-})
-
-//checked
 router.get("/myPersonalRecipesPreview", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
@@ -60,7 +47,6 @@ router.get("/myPersonalRecipesPreview", async (req, res, next) => {
   }
 })
 
-//checked
 router.get("/myPersonalRecipeFull/:id", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
@@ -73,7 +59,21 @@ router.get("/myPersonalRecipeFull/:id", async (req, res, next) => {
   }
 })
 
-//need to check
+/*************************FAMILY RECIPES******************************************/
+
+router.get("/myFamilyRecipes", async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    const myFamilyRecipes = await userUtils.getMyFamilyRecipes(user_id);
+    res.send(myFamilyRecipes);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+})
+
+/***************************MY FAVORITE RECIPES*************************************/
+
 router.get("/myFavRecipes", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
@@ -86,17 +86,50 @@ router.get("/myFavRecipes", async (req, res, next) => {
   }
 })
 
-//checked
-router.get("/myFamilyRecipes", async (req, res, next) => {
+
+router.post('/addFavRecipe', async(req, res, next) => {
+  try {
+      if(!req.body || !req.body.recipe_id){
+          throw { status: 401, message: "parameters missing" };
+      }
+      const user_id = req.user.user_id;
+      const recipe_id = req.body.recipe_id;
+      await userUtils.addFavRecipe(user_id ,recipe_id);
+      res.status(200).send({ message: "favorite recipe added", success: true });
+  } catch (error) {
+      next(error);
+  }
+});
+
+
+/***************************LAST SEEN RECIPES*************************************/
+
+router.get("/last3SeenRecipes", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
-    const myFamilyRecipes = await userUtils.getMyFamilyRecipes(user_id);
-    res.send(myFamilyRecipes);
+    const lastSeenRecipeID = await userUtils.getLast3SeenRecipes(user_id);
+    const lastSeenRecipeInfo = await recipeUtils.getRecipesInfo(lastSeenRecipeID);
+    res.send(lastSeenRecipeInfo);
   } catch (error) {
-    console.log(error);
     next(error);
   }
 })
+
+
+router.post('/addSeenRecipe', async(req, res, next) => {
+  try {
+      if(!req.body || !req.body.recipe_id){
+          throw { status: 401, message: "parameters missing" };
+      }
+      const user_id = req.user.user_id;
+      const recipe_id = req.body.recipe_id;
+      await userUtils.addSeenRecipe(user_id ,recipe_id);
+      res.status(200).send({ message: "seen recipe added", success: true });
+  } catch (error) {
+      next(error);
+  }
+});
+
 
 
 module.exports = router;
