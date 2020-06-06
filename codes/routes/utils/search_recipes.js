@@ -28,23 +28,38 @@ async function searchForRecipes(searchQuery, num, search_params) {
     return info_array;
 }
 
+async function searchForRandom(search_params){
+    let search_response = await axios.get(`${api_url}/random?${api_key}`,
+        {
+            params: search_params,
+        }
+    );
+    const recipes_id_list = extractRandomSearchResultsIds(search_response); 
+    let info_array = await getRecipesInfo(recipes_id_list);
+    return info_array;
+}
 //עבור כל מזהה שנקבל נרוץ עליו ונכין מערך של פרמיס עבור כל מזהה. נחכה שנסיים עם הכל ונחזיר את התשובות
 async function getRecipesInfo(recipes_id_list){
     let promises = [];
     //for each id -> get promise of GET response
+    //מבצעים מיפוי במערך 
     recipes_id_list.map((id) =>
         promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`))   
         );
+        
     let info_response = await Promise.all(promises);
 
+    //נרצה לחלץ את השדות הרלוונטים עבור כל אחד מהמתכונים שיש לנו
     relevantRecipesData = extractRelevantRecipeData(info_response);
-    return relevantRecipesData;
+   return relevantRecipesData;
+   
 }
 
 
 //עבור כל אחד מהתשובות שקיבלנו נוציא רק את הערכים שרלוונטים אלינו 
 function extractRelevantRecipeData(recipes_info){
-    recipes_info.map((record)  => {
+   return recipes_info.map((record)  => {
+    //יחלץ את הערכים הרלוונטים האלה
     const{
         id,
         image,
@@ -55,6 +70,8 @@ function extractRelevantRecipeData(recipes_info){
         vegan,
         glutenFree,   
     } = record.data;
+
+    //מחזירה אותם בתור אובייקט
     return{
         id: id,
         image: image,
@@ -78,6 +95,15 @@ async function promiseAll(func, param_list){
 
 function extractSearchResultsIds(search_response){
     let recipes = search_response.data.results;
+    recipes_id_list = [];
+    recipes.map((recipe) => {
+        recipes_id_list.push(recipe.id);
+    });
+    return recipes_id_list;
+}
+
+function extractRandomSearchResultsIds(search_response){
+    let recipes = search_response.data.recipes;
     recipes_id_list = [];
     recipes.map((recipe) => {
         recipes_id_list.push(recipe.id);
@@ -124,5 +150,9 @@ router.get("/search", async (req, res, next) => {
     }
   });
 
+  //getRecipesInfo([492560,559251,630293]).then(console.log);
+
   exports.searchForRecipes = searchForRecipes;
-  exports.extractQueriesPram = extractQueriesPram
+  exports.searchForRandom = searchForRandom;
+  exports.extractQueriesPram = extractQueriesPram;
+  exports.getRecipesInfo = getRecipesInfo;
