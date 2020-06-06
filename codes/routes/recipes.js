@@ -1,12 +1,17 @@
 var express = require("express");
 var router = express.Router();
-const axios = require("axios");
-const search_util = require("./utils/search_recipes.js");
-const api_domain = "https://api.spoonacular.com/recipes";
+const search_util = require("../routes/utils/search_recipes");
+
+//בדיקה שההחזרת מתכונים עובדת כמו שצריך
+/*router.get("/search/test", async(req, res) => {
+  let res124 = await search_util.getRecipesInfo([492560,559251,630293]);
+  res.send(res124);
+  });*/
+
+  
 
 
-
-router.use((req, res, nwxt) => {
+router.use((req, res, next) => {
   console.log("Recipes routs");
   next();
 });
@@ -19,10 +24,8 @@ router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   search_params.instructionsRequired = true;
   
   //check if queries params exist
-  search_util.extractQueriesParams(req.query, search_params).catch(function (error) {
-    next(error);
-  });
-  
+  search_util.extractQueriesPram(req.query, search_params);
+
   search_util
     .searchForRecipes(searchQuery, num, search_params)
     .then((info_array) => res.send(info_array))
@@ -32,11 +35,60 @@ router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
     });
 });
 
+
+
+router.get("/3randomRecipes", async (req, res, next) => {
+  search_params = {};
+  search_params.number = 3;
+  search_util
+    .searchForRandom(search_params)
+    .then((info_array) => res.send(info_array))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
+router.get("/fullRecipeInfo/:id", (req, res) => {
+  const{ recipeID } = req.params;
+  search_params = {};
+  search_params.id = recipeID;
+  recipes_id_list = [];
+  recipes_id_list.push(search_params.id);
+
+  search_util
+    .getFullRecipeInfo(recipes_id_list) //לרשום פונקציה
+    .then((info_array) => res.send(info_array))
+    .catch((error) => {
+        res.sendStatus(500);
+    });
+});
+
+/* // להמשיך את הפונקציה
+router.get("//previewRecipeInfo/:ids", (req, res) => {
+  const{ recipeID } = req.params;
+  search_params = {};
+  search_params.id = recipeID;
+  recipes_id_list = [];
+  recipes_id_list.push(search_params.id);
+
+  search_util
+    .getFullRecipeInfo(recipes_id_list) //לרשום פונקציה
+    .then((info_array) => res.send(info_array))
+    .catch((error) => {
+        res.sendStatus(500);
+    });
+});
+*/
 module.exports = router;
 
 /********************************************************/
 
 /*********************ERAN******************************/
+<<<<<<< HEAD
+/*
+=======
+>>>>>>> 647812a9741a65733c87af51ca4d28e0439dc1d9
 
 router.get("/Information", async (req, res, next) => {
   try {
