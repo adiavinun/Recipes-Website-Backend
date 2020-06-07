@@ -3,15 +3,15 @@ const router = express.Router();
 const search_util = require("../routes/utils/search_recipes");
 
 //פונקציית בדיקות שאני עובדת איתה למחוק בסוף
-/*router.get("/fullRecipeInfo/test", async(req, res) => {
+router.get("/fullRecipeInfo/test", async(req, res) => {
   let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
   res.send(res124);
   });
   router.get("/previewRecipeInfo/test", async(req, res) => {
   let res124 = await search_util.getPreviewRecipeInfo([492560,559251,630293]);
   //let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
-  res.send(res124);
-  });*/
+  res.send(res124) ;
+  });
 
 
 router.use((req, res, next) => {
@@ -74,7 +74,7 @@ router.get("/3randomRecipes", async (req, res, next) => {
 // 1.7
 // This function return all inforamtion of recipe: Preview, ingredient and quantity list, preparation instructions and number of dishes.
 
-router.get("/fullRecipeInfo/id/:id", (req, res) => {
+router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
@@ -88,13 +88,13 @@ router.get("/fullRecipeInfo/id/:id", (req, res) => {
     if(info_array.length === 0){
       res.status(400);
     }else{res.send(info_array);}
-    */
+*/
     .catch((error) => {
         res.sendStatus(500);
     });
 });
 
-router.get("/previewRecipeInfo/ids/:ids", (req, res) => {
+router.get("/previewRecipeInfo/Id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
@@ -108,7 +108,6 @@ router.get("/previewRecipeInfo/ids/:ids", (req, res) => {
         res.sendStatus(500);
     });
 });
-
 
 
 module.exports = router;

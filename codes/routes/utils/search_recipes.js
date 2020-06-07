@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const api_domain = "https://api.spoonacular.com/recipes";
-const api_key ="apiKey=25f5d3453750479f9213ccf1db014d32";
+const api_key ="apiKey=48929028c64b427fa9389ef953df7223";
 
 // 1.8
 /**
@@ -42,7 +42,7 @@ async function searchForRandom(search_params){
         );
         counter = 0;
         for(let i=0; i<search_response.data.recipes.length; i++){
-            if(search_response.data.recipes[i].analyzedInstructions.length > 0)
+            if(search_response.data.recipes[i].analyzedInstructions.length > 0) //לבדוק גם על המרכיבים כרגע עשיתי רק על ההוראות
                 counter ++; 
         }
     }
@@ -58,17 +58,17 @@ async function getRecipesInfo(recipes_id_list){
     //for each id -> get promise of GET response
     //מבצעים מיפוי במערך 
     recipes_id_list.map((id) =>
-        promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`))   
-        );
-        
+    promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`))   
+    );
+    
     let info_response = await Promise.all(promises);
 
     //נרצה לחלץ את השדות הרלוונטים עבור כל אחד מהמתכונים שיש לנו
     relevantRecipesData = extractRelevantRecipeData(info_response);
-   return relevantRecipesData; 
+    return relevantRecipesData; 
 }
 
-/*
+
 async function promiseAll(func, param_list){
     let promises = [];
     param_list.map((param) => promises.push(func(param)));
@@ -76,7 +76,7 @@ async function promiseAll(func, param_list){
 
     return info_response;
 }
-*/
+
 
 router.get("/search", async (req, res, next) => {
     try {
