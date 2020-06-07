@@ -168,7 +168,7 @@ async function getLast3SeenRecipes(user_id) {
   );
   let lastSeenRecipesArr = [];
   if (lastSeenRecipes || lastSeenRecipes.length != 0) {
-    for (i = 0; i < lastSeenRecipes.length; i++) {
+    for (var i = 0; i < lastSeenRecipes.length; i++) {
       lastSeenRecipesArr.push(lastSeenRecipes[i].recipe_id);
     }
   }
