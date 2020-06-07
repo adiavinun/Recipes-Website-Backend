@@ -113,7 +113,6 @@ async function getPreviewRecipeInfo(recipes_ids){
     return relevantRecipes;
 }
 
-
 /*******************************Extract Data function***************************************/
  /**
   * 1.8 - This function return the id of recipes relevent.
