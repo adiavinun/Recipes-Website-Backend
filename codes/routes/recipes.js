@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const search_util = require("../routes/utils/search_recipes");
 
-//פונקציית בדיקות שאני עובדת איתה למחוק בסוף
-router.get("/fullRecipeInfo/test", async(req, res) => {
+/*******************************TEST***************************************/
+ /* router.get("/fullRecipeInfo/test", async(req, res) => {
   let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
   res.send(res124);
   });
@@ -11,7 +11,7 @@ router.get("/fullRecipeInfo/test", async(req, res) => {
   let res124 = await search_util.getPreviewRecipeInfo([492560,559251,630293]);
   //let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
   res.send(res124) ;
-  });
+  });*/
 
 
 router.use((req, res, next) => {
@@ -19,9 +19,12 @@ router.use((req, res, next) => {
   next();
 });
 
+/*******************************ROUTERS***************************************/
 
- //routers:
- //This function return search recipe by query and amount
+ 
+ /**
+  * This function return search recipe by query and amount
+  */
 router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   const {searchQuery, num} = req.params;
   //set the params
@@ -32,7 +35,6 @@ router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
   
   //check if queries params exist
   search_util.extractQueriesPram(req.query, search_params);
-
   search_util
     .searchForRecipes(searchQuery, num, search_params)
     .then((info_array) => res.send(info_array))
@@ -48,9 +50,9 @@ router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
     });
 });
 
-//1.6
-//This function return random recipes
-//לבדוק אם צריל שלוש או בכללי חיפוש קנדולי של איקס מתכונים
+/**
+ * 1.6 - This function return random recipes
+ */
 router.get("/3randomRecipes", async (req, res, next) => {
   search_params = {};
   search_params.number = 3;
@@ -70,10 +72,9 @@ router.get("/3randomRecipes", async (req, res, next) => {
     });
 });
 
-
-// 1.7
-// This function return all inforamtion of recipe: Preview, ingredient and quantity list, preparation instructions and number of dishes.
-
+/**
+ * 1.7 - This function return all inforamtion of recipe: Preview, ingredient and quantity list, preparation instructions and number of dishes.
+ */
 router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
@@ -88,12 +89,15 @@ router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
     if(info_array.length === 0){
       res.status(400);
     }else{res.send(info_array);}
-*/
+    */
     .catch((error) => {
         res.sendStatus(500);
     });
 });
 
+/**
+ * 1.1 -This function return preview inforamtion of recipe
+ */
 router.get("/previewRecipeInfo/Id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
@@ -112,5 +116,5 @@ router.get("/previewRecipeInfo/Id/:recipeID", (req, res) => {
 
 module.exports = router;
 
-/********************************************************/
+
 
