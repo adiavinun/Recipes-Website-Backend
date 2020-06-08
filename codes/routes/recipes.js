@@ -75,7 +75,7 @@ router.get("/3randomRecipes", async (req, res, next) => {
 /**
  * 1.7 - This function return all inforamtion of recipe: Preview, ingredient and quantity list, preparation instructions and number of dishes.
  */
-router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
+router.get("/fullRecipeInfo/id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
@@ -98,7 +98,7 @@ router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
 /**
  * 1.1 -This function return preview inforamtion of recipe
  */
-router.get("/previewRecipeInfo/Id/:recipeID", (req, res) => {
+router.get("/previewRecipeInfo/id/:recipeID", (req, res) => {
   const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
