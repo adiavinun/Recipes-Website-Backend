@@ -13,7 +13,11 @@ const search_util = require("../routes/utils/search_recipes");
   res.send(res124) ;
   });*/
   //******************** */
-
+  router.get("/test", async(req, res) => {
+    let res124 = await search_util.getRecipesInfo([492560,559251,630293]);
+    //let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
+    res.send(res124) ;
+    });
 
 router.use((req, res, next) => {
   console.log("Recipes routs");
@@ -76,13 +80,14 @@ router.get("/3randomRecipes", async (req, res, next) => {
 /**
  * 1.7 - This function return all inforamtion of recipe: Preview, ingredient and quantity list, preparation instructions and number of dishes.
  */
-router.get("/fullRecipeInfo/id/:recipeID", (req, res) => {
-  const{ recipeID } = req.params;
+router.get("/fullRecipeInfo/id/:ids",async function (req, res) {
+  /*const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
   recipes_id_list = [];
   recipes_id_list.push(search_params.id);
 
+  
   search_util
     .getFullRecipeInfo(recipes_id_list) 
     .then((info_array) => res.send(info_array))
@@ -91,17 +96,25 @@ router.get("/fullRecipeInfo/id/:recipeID", (req, res) => {
       res.status(400);
     }else{res.send(info_array);}
     */
-    .catch((error) => {
+   /* .catch((error) => {
         res.sendStatus(500);
-    });
+    });*/
+    try {
+      const idArray = JSON.parse(req.params.ids);
+      const dictRecipeInfo = await search_util.getFullRecipeInfo(idArray);
+      res.send(dictRecipeInfo);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
 });
 
 
 /**
  * 1.1 -This function return preview inforamtion of recipe
  */
-router.get("/previewRecipeInfo/id/:recipeID", (req, res) => {
-  const{ recipeID } = req.params;
+router.get("/previewRecipeInfo/id/:ids",async function (req, res){
+ /* const{ recipeID } = req.params;
   search_params = {};
   search_params.id = recipeID;
   recipes_id_list = [];
@@ -112,7 +125,15 @@ router.get("/previewRecipeInfo/id/:recipeID", (req, res) => {
     .then((info_array) => res.send(info_array))
     .catch((error) => {
         res.sendStatus(500);
-    });
+    });*/
+    try {
+      const idArray = JSON.parse(req.params.ids);
+      const dictRecipeInfo = await search_util.getPreviewRecipeInfo(idArray);
+      res.send(dictRecipeInfo);
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
 });
 
 
