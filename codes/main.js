@@ -36,7 +36,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500).send({ message: err.message, success: false });
 });
 
-var port = "4000";
+var port = "3000";
 const server = app.listen(port, () => {
   console.log(`Server listen on port ${port}`);
 });
