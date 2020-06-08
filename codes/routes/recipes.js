@@ -13,11 +13,7 @@ const search_util = require("../routes/utils/search_recipes");
   res.send(res124) ;
   });*/
   //******************** */
-  router.get("/test", async(req, res) => {
-    let res124 = await search_util.getRecipesInfo([492560,559251,630293]);
-    //let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
-    res.send(res124) ;
-    });
+  
 
 router.use((req, res, next) => {
   console.log("Recipes routs");
