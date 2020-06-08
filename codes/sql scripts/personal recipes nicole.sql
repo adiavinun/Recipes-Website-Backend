@@ -1,6 +1,6 @@
 --------------------------VEGAN CREAMED POTATO-------------------
 
-Insert into personalRecipes values (34, '9b6c41d7-009e-4994-801e-18a8bf440951', 'Vegan creamed potato', 'https://veganinthefreezer.com/wp-content/uploads/2018/09/Herbed-Scalloped-Potatoes-feature.jpg', '90', '1', '1', '0', '10');
+Insert into personalRecipes values (34, '9b6c41d7-009e-4994-801e-18a8bf440951', 'Vegan Creamed Potato', 'https://veganinthefreezer.com/wp-content/uploads/2018/09/Herbed-Scalloped-Potatoes-feature.jpg', '90', '1', '1', '0', '10');
 
 Insert into personalIngredients values (34, 'potatoes', '8', '');
 Insert into personalIngredients values (34, 'coconut cream', '1', 'package');
@@ -15,7 +15,6 @@ Insert into personalIngredients values (34, 'csweet paprika', '2', 'teaspoons ')
 Insert into personalIngredients values (34, 'breadcrumbs', '3', 'tablespoons');
 Insert into personalIngredients values (34, 'hot water', '1', 'cup');
 
-
 Insert into personalInstructions values (34, 1, 'Preheat oven to 180 degrees Celsius.');
 Insert into personalInstructions values (34, 2, 'Peel the potatoes and cut them into relatively thin pieces. Place the potato in a tray covered in aluminum foil.');
 Insert into personalInstructions values (34, 3, 'For the sauce: In a pot put 1 teaspoon oil and fry 1 chopped onion until golden. Add 6 chopped garlic cloves, salt, pepper, sweet paprika, coconut cream, 1 cup hot water, nutmeg, olive oil and stir. Cook over medium heat for 10 minutes.');
@@ -25,7 +24,7 @@ Insert into personalInstructions values (34, 5, 'Put in the oven for about an ho
 
 --------------------------WHITE RICE-------------------
 
-Insert into personalRecipes values (35, '9b6c41d7-009e-4994-801e-18a8bf440951', 'White Rice', 'https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18195812/fc31tc016-03-thumb16x9.jpg', '30', '1', '1', '0', '8');
+Insert into personalRecipes values (35, '9b6c41d7-009e-4994-801e-18a8bf440951', 'White Rice', 'https://s3.amazonaws.com/finecooking.s3.tauntonclud.com/app/uploads/2017/04/18195812/fc31tc016-03-thumb16x9.jpg', '30', '1', '1', '0', '6');
 
 Insert into personalIngredients values (35, 'white rice', '1.5', 'cups');
 Insert into personalIngredients values (35, 'onion', '1', '');

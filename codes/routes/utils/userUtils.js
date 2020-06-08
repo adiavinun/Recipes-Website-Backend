@@ -53,17 +53,12 @@ async function getMyPersonalRecipesPreview(user_id) {
           FROM dbo.personalRecipes WHERE author= '${user_id}'`
     )
   );
+  if (!myPersRec) {
+    throw { status: 401, message: "no personal recipes" };
+  }
   return (myPersRec);
 }
-async function getMyPersonalRecipesID(user_id) {
 
-  let myPersRecID = (
-    await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.personalRecipes WHERE author= '${user_id}'`
-    )
-  );
-  return (myPersRecID);
-}
 async function getMyPersonalRecipeFull(user_id, recipe_id) {
   try {
     var myPersRec = (
@@ -73,11 +68,11 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
       )
     )[0];
     if (!myPersRec) {
-      throw { status: 401, message: "no personal recipes" };
+      throw { status: 401, message: "user doesnt have this recipe id" };
     }
     let personalIngredients = (
-      await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}'`
+      await DButils.execQuery( 
+        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let personalInstructions = (
@@ -94,10 +89,9 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
 }
 
 /*************************FAMILY RECIPES******************************************/
+async function getMyFamilyRecipesPreview(user_id) {
 
-async function getMyFamilyRecipes(user_id) {
-
-  var myFamRec = (
+  let myFamRec = (
     await DButils.execQuery(
       `SELECT * FROM dbo.familyRecipes WHERE author= '${user_id}'`
     )
@@ -105,12 +99,22 @@ async function getMyFamilyRecipes(user_id) {
   if (!myFamRec) {
     throw { status: 401, message: "no family recipes" };
   }
-  var dict = new Object();
-  for (var i = 0; i < myFamRec.length; i++) {
-    recipe_id = myFamRec[i].recipe_id;
+  return (myFamRec);
+}
+
+async function getMyFamilyRecipesFull(user_id, recipe_id) {
+  try {
+    var myFamRec = (
+      await DButils.execQuery(
+        `SELECT * FROM dbo.familyRecipes WHERE author= '${user_id}' AND recipe_id= '${recipe_id}'`
+      )
+    )[0];
+    if (!myFamRec) {
+      throw { status: 401, message: "user doesnt have this recipe id" };
+    }
     let familyIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}'`
+        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let familylInstructions = (
@@ -118,11 +122,12 @@ async function getMyFamilyRecipes(user_id) {
         `SELECT number, description FROM dbo.familyInstructions WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
-    myFamRec[i].ingredients = familyIngredients;
-    myFamRec[i].instructions = familylInstructions;
-    dict[recipe_id] = myFamRec[i];
+    myFamRec.ingredients = familyIngredients;
+    myFamRec.instructions = familylInstructions;
+  } catch (error) {
+    throw error;
   }
-  return (dict);
+  return (myFamRec);
 }
 
 /***************************MY FAVORITE RECIPES*************************************/
@@ -134,6 +139,9 @@ async function getMyFavRecipesID(user_id) {
       `SELECT recipe_id FROM dbo.favoriteRecipes WHERE author= '${user_id}'`
     )
   );
+  if (!myFavRec) {
+    throw { status: 401, message: "no favorite recipes" };
+  }
   let favRecipesIDArr = [];
   if (myFavRec || myFavRec.length != 0) {
     for (i = 0; i < myFavRec.length; i++) {
@@ -166,6 +174,9 @@ async function getLast3SeenRecipes(user_id) {
       `SELECT TOP 3 recipe_id FROM dbo.lastSeen WHERE author= '${user_id}' ORDER BY time DESC`
     )
   );
+  if (!lastSeenRecipes) {
+    throw { status: 401, message: "no last seen recipes" };
+  }
   let lastSeenRecipesArr = [];
   if (lastSeenRecipes || lastSeenRecipes.length != 0) {
     for (var i = 0; i < lastSeenRecipes.length; i++) {
@@ -195,10 +206,10 @@ async function addSeenRecipe(user_id, recipe_id) {
 exports.getUserInfoOnRecipes = getUserInfoOnRecipes;
 exports.getLast3SeenRecipes = getLast3SeenRecipes;
 exports.getMyPersonalRecipesPreview = getMyPersonalRecipesPreview;
-exports.getMyPersonalRecipesID = getMyPersonalRecipesID;
 exports.getMyPersonalRecipeFull = getMyPersonalRecipeFull;
 exports.getMyFavRecipesID = getMyFavRecipesID;
-exports.getMyFamilyRecipes = getMyFamilyRecipes;
+exports.getMyFamilyRecipesPreview = getMyFamilyRecipesPreview;
+exports.getMyFamilyRecipesFull = getMyFamilyRecipesFull;
 exports.addSeenRecipe = addSeenRecipe;
 exports.addFavRecipe = addFavRecipe;
 

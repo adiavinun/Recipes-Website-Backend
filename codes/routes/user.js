@@ -22,7 +22,7 @@ router.use(async (req, res, next) => {
   else res.sendStatus(401);
 });
 
-router.get("/recipeInfo/:ids", async (req, res) => {
+router.get("/recipeInfo/id/:ids", async (req, res) => {
   try {
     const idArray = JSON.parse(req.params.ids);
     const user_id = req.user.user_id;
@@ -47,7 +47,7 @@ router.get("/myPersonalRecipesPreview", async (req, res, next) => {
   }
 })
 
-router.get("/myPersonalRecipeFull/:id", async (req, res, next) => {
+router.get("/myPersonalRecipeFull/id/:id", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
     const recipe_id =  req.params.id;
@@ -61,11 +61,23 @@ router.get("/myPersonalRecipeFull/:id", async (req, res, next) => {
 
 /*************************FAMILY RECIPES******************************************/
 
-router.get("/myFamilyRecipes", async (req, res, next) => {
+router.get("/myFamilyRecipesPreview", async (req, res, next) => {
   try {
     const user_id = req.user.user_id;
-    const myFamilyRecipes = await userUtils.getMyFamilyRecipes(user_id);
+    const myFamilyRecipes = await userUtils.getMyFamilyRecipesPreview(user_id);
     res.send(myFamilyRecipes);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+})
+
+router.get("/myFamilyRecipeFull/id/:id", async (req, res, next) => {
+  try {
+    const user_id = req.user.user_id;
+    const recipe_id =  req.params.id;
+    const recipeInfo = await userUtils.getMyFamilyRecipesFull(user_id, recipe_id);
+    res.send(recipeInfo);
   } catch (error) {
     console.log(error);
     next(error);
