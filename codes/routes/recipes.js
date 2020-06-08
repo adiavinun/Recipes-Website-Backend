@@ -12,6 +12,7 @@ const search_util = require("../routes/utils/search_recipes");
   //let res124 = await search_util.getFullRecipeInfo([492560,559251,630293]);
   res.send(res124) ;
   });*/
+  //******************** */
 
 
 router.use((req, res, next) => {
@@ -94,6 +95,7 @@ router.get("/fullRecipeInfo/Id/:recipeID", (req, res) => {
         res.sendStatus(500);
     });
 });
+
 
 /**
  * 1.1 -This function return preview inforamtion of recipe
