@@ -68,11 +68,11 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
       )
     )[0];
     if (!myPersRec) {
-      throw { status: 401, message: "no personal recipes" };
+      throw { status: 401, message: "user doesnt have this recipe id" };
     }
     let personalIngredients = (
-      await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}'`
+      await DButils.execQuery( 
+        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let personalInstructions = (
@@ -110,11 +110,11 @@ async function getMyFamilyRecipesFull(user_id, recipe_id) {
       )
     )[0];
     if (!myFamRec) {
-      throw { status: 401, message: "no family recipes" };
+      throw { status: 401, message: "user doesnt have this recipe id" };
     }
     let familyIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}'`
+        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let familylInstructions = (
