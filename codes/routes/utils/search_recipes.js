@@ -105,13 +105,16 @@ async function getFullRecipeInfo(recipes_id_list){
 /**
  * 1.1
  */
-async function getPreviewRecipeInfo(recipes_ids){
+async function getPreviewRecipeInfo(idArray){
     let promises = [];
-    recipes_ids.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
+    idArray.map((id) => promises.push(axios.get(`${api_domain}/${id}/information?${api_key}`)));
     let info_response1 = await Promise.all(promises);
     relevantRecipes = extractSearchResultsData_PreviewRecipe(info_response1);
-    return relevantRecipes;
+    return relevantRecipes; 
 }
+
+
+
 
 /*******************************Extract Data function***************************************/
  /**
@@ -145,8 +148,8 @@ function extractRandomSearchResultsIds(search_response){
  * @param {*} recipes_Info 
  */
 function extractSearchResultsData_PreviewRecipe(recipes_Info){
-    let dic = {};
-    recipes_Info.map((record) => {
+    //let dic = {};
+   return recipes_Info.map((record) => {
         // for each cell in map (recipe) extract relevant information with keys
         const {
             id,
@@ -159,7 +162,8 @@ function extractSearchResultsData_PreviewRecipe(recipes_Info){
             image,      
         } = record.data;
         // return for each the rekecant information
-        var inside = {
+        //var inside = {
+        return {
             id: id,
             title: title,
             readyInMinutes: readyInMinutes,
@@ -170,21 +174,22 @@ function extractSearchResultsData_PreviewRecipe(recipes_Info){
             image: image,
             
         }
-        var recipeID = record.data.id;
-        dic [recipeID] = new Object();
-        dic [recipeID] = inside;
+        //var recipeID = record.data.id;
+        //dic [recipeID] = new Object();
+        //dic [recipeID] = inside;
 
     });
-    return dic;
+    //return dic;
 }
+
 
 /**
  * 1.7 - This function extract the all full relavnt data from the response external api
  * @param {*} recipes_Info 
  */
 function extractSearchResultsData_fullRecipe(recipes_Info){
-    let dic = {};
-    recipes_Info.map((record) => {
+    //let dic = {};
+    return recipes_Info.map((record) => {
          // for each cell in map (recipe) extract relevant information with keys
         const {
             id,
@@ -200,7 +205,8 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
             servings,
         } = record.data;
         // return for each the rekecant information
-        var inside = {
+        //var inside = {
+        return {
             id: id,
             title: title,
             readyInMinutes: readyInMinutes,
@@ -213,11 +219,11 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
             instructions: instructions,
             servings: servings,
         }
-        var recipeID = record.data.id;
-        dic [recipeID] = new Object();
-        dic [recipeID] = inside;
+        //var recipeID = record.data.id;
+        ////dic [recipeID] = new Object();
+        //dic [recipeID] = inside;
     });
-    return dic;
+    //return dic;
 }
 
 /**
@@ -225,23 +231,24 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
  * @param {*} extendedIngredients 
  */
 function getIngrediants(extendedIngredients){
-    let dic = {};
-    extendedIngredients.map((ingredients) => {
+    //let dic = {};
+    return extendedIngredients.map((ingredients) => {
         const {
             name,
             amount,
             unit,
         } = ingredients;
-        var inside = {
+        //var inside = {
+        return {
             name: name,
             amount: amount,
             unit: unit,           
         }
-        var ingredientsName = ingredients.name;
-        dic [ingredientsName] = new Object();
-        dic [ingredientsName] = inside;
+        //var ingredientsName = ingredients.name;
+        //dic [ingredientsName] = new Object();
+        //dic [ingredientsName] = inside;
     });
-    return dic;
+    //return dic;
 }
 
 
