@@ -24,6 +24,9 @@ router.use(async (req, res, next) => {
 
 router.get("/recipeInfo/id/:ids", async (req, res) => {
   try {
+    if(!req || !req.params || !req.params.ids){
+      throw { status: 402, message: "parameters missing" };
+    }
     const idArray = JSON.parse(req.params.ids);
     const user_id = req.user.user_id;
     const dictRecipeInfo = await userUtils.getUserInfoOnRecipes(user_id, idArray);
@@ -49,6 +52,9 @@ router.get("/myPersonalRecipesPreview", async (req, res, next) => {
 
 router.get("/myPersonalRecipeFull/id/:id", async (req, res, next) => {
   try {
+    if(!req || !req.params || !req.params.id){
+      throw { status: 402, message: "parameters missing" };
+    }
     const user_id = req.user.user_id;
     const recipe_id =  req.params.id;
     const recipeInfo = await userUtils.getMyPersonalRecipeFull(user_id, recipe_id);
@@ -74,6 +80,9 @@ router.get("/myFamilyRecipesPreview", async (req, res, next) => {
 
 router.get("/myFamilyRecipeFull/id/:id", async (req, res, next) => {
   try {
+    if(!req || !req.params || !req.params.id){
+      throw { status: 402, message: "parameters missing" };
+    }
     const user_id = req.user.user_id;
     const recipe_id =  req.params.id;
     const recipeInfo = await userUtils.getMyFamilyRecipesFull(user_id, recipe_id);
@@ -141,7 +150,6 @@ router.post('/addSeenRecipe', async(req, res, next) => {
       next(error);
   }
 });
-
 
 
 

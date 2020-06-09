@@ -56,7 +56,12 @@ async function getMyPersonalRecipesPreview(user_id) {
   if (!myPersRec) {
     throw { status: 401, message: "no personal recipes" };
   }
-  return (myPersRec);
+  let myPersRecArr = [];
+  for (i = 0; i < myPersRec.length; i++) {
+    myPersRecArr.push(myPersRec[i]);
+  }
+  
+  return (myPersRecArr);
 }
 
 async function getMyPersonalRecipeFull(user_id, recipe_id) {
@@ -71,7 +76,7 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
       throw { status: 401, message: "user doesnt have this recipe id" };
     }
     let personalIngredients = (
-      await DButils.execQuery( 
+      await DButils.execQuery(
         `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
@@ -82,6 +87,7 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
     );
     myPersRec.ingredients = personalIngredients;
     myPersRec.instructions = personalInstructions;
+    
   } catch (error) {
     throw error;
   }
@@ -99,7 +105,11 @@ async function getMyFamilyRecipesPreview(user_id) {
   if (!myFamRec) {
     throw { status: 401, message: "no family recipes" };
   }
-  return (myFamRec);
+  let myFamRecArr = [];
+  for (i = 0; i < myFamRec.length; i++) {
+    myFamRecArr.push(myFamRec[i]);
+  }
+  return (myFamRecArr);
 }
 
 async function getMyFamilyRecipesFull(user_id, recipe_id) {
@@ -117,13 +127,13 @@ async function getMyFamilyRecipesFull(user_id, recipe_id) {
         `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
-    let familylInstructions = (
+    let familyInstructions = (
       await DButils.execQuery(
         `SELECT number, description FROM dbo.familyInstructions WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     myFamRec.ingredients = familyIngredients;
-    myFamRec.instructions = familylInstructions;
+    myFamRec.instructions = familyInstructions;
   } catch (error) {
     throw error;
   }
@@ -143,10 +153,8 @@ async function getMyFavRecipesID(user_id) {
     throw { status: 401, message: "no favorite recipes" };
   }
   let favRecipesIDArr = [];
-  if (myFavRec || myFavRec.length != 0) {
-    for (i = 0; i < myFavRec.length; i++) {
-      favRecipesIDArr.push(myFavRec[i].recipe_id);
-    }
+  for (i = 0; i < myFavRec.length; i++) {
+    favRecipesIDArr.push(myFavRec[i].recipe_id);
   }
   return (favRecipesIDArr);
 }
@@ -157,7 +165,7 @@ async function addFavRecipe(user_id, recipe_id) {
       `SELECT recipe_id FROM dbo.favoriteRecipes WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
     )
   );
-  if (!favRecipe || favRecipe.length == 0){
+  if (!favRecipe || favRecipe.length == 0) {
     await DButils.execQuery(
       `INSERT INTO dbo.favoriteRecipes (recipe_id, author) VALUES ('${recipe_id}','${user_id}');`
     );
@@ -178,10 +186,8 @@ async function getLast3SeenRecipes(user_id) {
     throw { status: 401, message: "no last seen recipes" };
   }
   let lastSeenRecipesArr = [];
-  if (lastSeenRecipes || lastSeenRecipes.length != 0) {
-    for (var i = 0; i < lastSeenRecipes.length; i++) {
-      lastSeenRecipesArr.push(lastSeenRecipes[i].recipe_id);
-    }
+  for (var i = 0; i < lastSeenRecipes.length; i++) {
+    lastSeenRecipesArr.push(lastSeenRecipes[i].recipe_id);
   }
   return (lastSeenRecipesArr);
 }
@@ -192,7 +198,7 @@ async function addSeenRecipe(user_id, recipe_id) {
       `SELECT recipe_id FROM dbo.lastSeen WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
     )
   );
-  if (lastSeenRecipes && lastSeenRecipes.length > 0){
+  if (lastSeenRecipes && lastSeenRecipes.length > 0) {
     await DButils.execQuery(
       `DELETE FROM dbo.lastSeen WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
     );
