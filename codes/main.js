@@ -12,8 +12,8 @@ const DButils = require("./routes/utils/DButils");
 // };
 
 // app.use(cors(corsConfig));
-app.options("*", cors(corsConfig));
-var cors = require("cors");
+//app.options("*", cors(corsConfig));
+//var cors = require("cors");
 
 var app = express();
 app.use(logger("dev")); //logger
