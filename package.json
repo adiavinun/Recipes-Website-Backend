@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node codes/main.js"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "keywords": [],
   "author": "Adi_Nicole",
   "license": "ISC",

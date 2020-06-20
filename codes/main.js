@@ -6,6 +6,15 @@ var logger = require("morgan");
 const session = require("client-sessions");
 const DButils = require("./routes/utils/DButils");
 
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+var cors = require("cors");
+
 var app = express();
 app.use(logger("dev")); //logger
 app.use(express.json()); // parse application/json
