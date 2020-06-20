@@ -73,7 +73,7 @@ CREATE TABLE [dbo].[lastSeen](
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
 
-SELECT * FROM favoriteRecipes
+SELECT * FROM lastSeen
 Insert into lastSeen (recipe_id, author) values (630293, '9b6c41d7-009e-4994-801e-18a8bf440951');
 Insert into lastSeen (recipe_id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
 Insert into lastSeen (recipe_id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
