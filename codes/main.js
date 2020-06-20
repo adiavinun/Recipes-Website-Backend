@@ -5,15 +5,16 @@ var path = require("path");
 var logger = require("morgan");
 const session = require("client-sessions");
 const DButils = require("./routes/utils/DButils");
+var cors = require("cors");
 
-// const corsConfig = {
-//   origin: true,
-//   credentials: true,
-// };
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
 
-// app.use(cors(corsConfig));
-//app.options("*", cors(corsConfig));
-//var cors = require("cors");
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+
 
 var app = express();
 app.use(logger("dev")); //logger
