@@ -4,17 +4,8 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 const session = require("client-sessions");
+const cors = require("cors");
 const DButils = require("./routes/utils/DButils");
-// const cors = require("cors");
-
-// const corsConfig = {
-//   origin: true,
-//   credentials: true,
-// };
-
-// app.use(cors(corsConfig));
-// app.options("*", cors(corsConfig));
-
 
 var app = express();
 app.use(logger("dev")); //logger
@@ -31,6 +22,13 @@ app.use(
 app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, "public"))); //To serve static files such as images, CSS files, and JavaScript files
 
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
 
 const user = require("./routes/user");
 const recipes = require("./routes/recipes");
