@@ -1,11 +1,11 @@
 CREATE TABLE [dbo].[personalRecipes](
 	[recipe_id] [varchar](300),
 	[author] [UNIQUEIDENTIFIER] NOT NULL,
-	[recipeName] [varchar](300) NOT NULL,
-	[urlPic] [varchar](300) NOT NULL,
-	[prepTime] [int] NOT NULL,
-	[isVegan] [BIT] NOT NULL,
-	[isVegetarian] [BIT] NOT NULL,
+	[title] [varchar](300) NOT NULL,
+	[image] [varchar](300) NOT NULL,
+	[readyInMinutes] [int] NOT NULL,
+	[vegan] [BIT] NOT NULL,
+	[vegetarian] [BIT] NOT NULL,
 	[glutenFree] [BIT] NOT NULL,
 	--[instructions] [varchar](300) NOT NULL,
 	[numOfMeals] [int] NOT NULL,
@@ -14,6 +14,8 @@ CREATE TABLE [dbo].[personalRecipes](
 	PRIMARY KEY (recipe_id),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
+EXEC sp_RENAME 'personalRecipes.isVegan', 'vegan', 'COLUMN'
+select * from personalRecipes
 
 CREATE TABLE [dbo].[personalIngredients](
 	[recipe_id] [varchar](300) NOT NULL,
