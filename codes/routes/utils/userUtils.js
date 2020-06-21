@@ -49,7 +49,7 @@ async function getMyPersonalRecipesPreview(user_id) {
 
   let myPersRec = (
     await DButils.execQuery(
-      `SELECT recipe_id, recipeName, urlPic, prepTime, isVegan, isVegetarian, glutenFree 
+      `SELECT recipe_id, title, image, readyInMinutes, vegan, vegetarian, glutenFree 
           FROM dbo.personalRecipes WHERE author= '${user_id}'`
     )
   );
@@ -63,6 +63,7 @@ async function getMyPersonalRecipesPreview(user_id) {
   
   return (myPersRecArr);
 }
+
 
 async function getMyPersonalRecipeFull(user_id, recipe_id) {
   try {
