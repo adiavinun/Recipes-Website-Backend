@@ -4,7 +4,7 @@ const DButils = require("../routes/utils/DButils");
 const bcrypt = require("bcrypt");
 
 //Authenticate
-router.use((req, res, next) => {
+router.use(async (req, res, next) => {
   if (req.session && req.session.id) {
     const id = req.session.id;
     const user = (
