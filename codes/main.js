@@ -6,6 +6,9 @@ var logger = require("morgan");
 const session = require("client-sessions");
 const cors = require("cors");
 const DButils = require("./routes/utils/DButils");
+import VueCookies from "vue-cookies";
+Vue.use(VueCookies);
+
 
 var app = express();
 app.use(logger("dev")); //logger
