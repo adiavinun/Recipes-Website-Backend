@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[personalRecipes](
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
 EXEC sp_RENAME 'personalRecipes.isVegan', 'vegan', 'COLUMN'
-select * from personalRecipes
+select * from familyInstructions
 
 CREATE TABLE [dbo].[personalIngredients](
 	[recipe_id] [varchar](300) NOT NULL,
