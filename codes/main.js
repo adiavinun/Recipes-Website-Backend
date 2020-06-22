@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 //#region express configures
 var express = require("express");
@@ -8,6 +9,8 @@ const cors = require("cors");
 const DButils = require("./routes/utils/DButils");
 import VueCookies from "vue-cookies";
 Vue.use(VueCookies);
+
+
 
 
 var app = express();
