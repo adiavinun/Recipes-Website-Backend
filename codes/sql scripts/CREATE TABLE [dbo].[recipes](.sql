@@ -38,14 +38,16 @@ CREATE TABLE [dbo].[personalInstructions](
 CREATE TABLE [dbo].[familyRecipes](
 	[recipe_id] [varchar] (300) NOT NULL,
 	[author] [UNIQUEIDENTIFIER] NOT NULL,
-	[recipeName] [varchar](300) NOT NULL,
+	[title] [varchar](300) NOT NULL,
 	[recipeOwner] [varchar] (300) NOT NULL,
 	[whenUsuallyMakeRecipe] [varchar] (300) NOT NULL,
 	--[instructions] [varchar](300) NOT NULL,
-	[urlPic] [varchar](300) NOT NULL,
+	[image] [varchar](300) NOT NULL,
 	PRIMARY KEY (recipe_id),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
+EXEC sp_RENAME 'familyRecipes.recipeName', 'title', 'COLUMN'
+
 
 CREATE TABLE [dbo].[familyIngredients](
 	[recipe_id] [varchar](300) NOT NULL,
