@@ -1,0 +1,1282 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Recipe API</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Recipe API</h1>
+    <div class="app-desc">This is a recipe API</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/adiavinun/API_recipes/1.0.0</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:session KeyInQuery:true KeyInHeader:false</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Auth">Auth</a></h4>
+  <ul>
+  <li><a href="#loginPost"><code><span class="http-method">post</span> /login</code></a></li>
+  <li><a href="#register"><code><span class="http-method">post</span> /register</code></a></li>
+  </ul>
+  <h4><a href="#Recipe">Recipe</a></h4>
+  <ul>
+  <li><a href="#get3RandomRecipes"><code><span class="http-method">get</span> /recipes/3randomRecipes</code></a></li>
+  <li><a href="#recipesFullRecipeInfoIdIdsGet"><code><span class="http-method">get</span> /recipes/fullRecipeInfo/id/{ids}</code></a></li>
+  <li><a href="#recipesPreviewRecipeInfoIdIdsGet"><code><span class="http-method">get</span> /recipes/previewRecipeInfo/id/{ids}</code></a></li>
+  <li><a href="#recipesSearchQuerySearchQueryAmountNumGet"><code><span class="http-method">get</span> /recipes/search/query/{searchQuery}/amount/{num}</code></a></li>
+  </ul>
+  <h4><a href="#User">User</a></h4>
+  <ul>
+  <li><a href="#userAddFavRecipePost"><code><span class="http-method">post</span> /user/addFavRecipe</code></a></li>
+  <li><a href="#userAddSeenRecipePost"><code><span class="http-method">post</span> /user/addSeenRecipe</code></a></li>
+  <li><a href="#userLast3SeenRecipesGet"><code><span class="http-method">get</span> /user/last3SeenRecipes</code></a></li>
+  <li><a href="#userMyFamilyRecipeFullIdIdGet"><code><span class="http-method">get</span> /user/myFamilyRecipeFull/id/{id}</code></a></li>
+  <li><a href="#userMyFamilyRecipesPreviewGet"><code><span class="http-method">get</span> /user/myFamilyRecipesPreview</code></a></li>
+  <li><a href="#userMyFavRecipesGet"><code><span class="http-method">get</span> /user/myFavRecipes</code></a></li>
+  <li><a href="#userMyPersonalRecipeFullIdIdGet"><code><span class="http-method">get</span> /user/myPersonalRecipeFull/id/{id}</code></a></li>
+  <li><a href="#userMyPersonalRecipesPreviewGet"><code><span class="http-method">get</span> /user/myPersonalRecipesPreview</code></a></li>
+  <li><a href="#userRecipeInfoIdIdsGet"><code><span class="http-method">get</span> /user/recipeInfo/id/{ids}</code></a></li>
+  </ul>
+
+  <h1><a name="Auth">Auth</a></h1>
+  <div class="method"><a name="loginPost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /login</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">loginPost</span>)</div>
+    <div class="method-notes">A JSON object containing the username and password.</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#body">body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    User authenitcated successfully. The session ID is returned in a cookie named &lt;code&gt;session&lt;/code&gt;.  You need to include this cookie in subsequent requests
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    Username or Password incorrect
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="register"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /register</code></pre></div>
+    <div class="method-summary">user signs up to the website (<span class="nickname">register</span>)</div>
+    <div class="method-notes">saves all the users data in the DB</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#User">User</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    user created
+        <a href="#"></a>
+    <h4 class="field-label">409</h4>
+    username already exists
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Recipe">Recipe</a></h1>
+  <div class="method"><a name="get3RandomRecipes"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /recipes/3randomRecipes</code></pre></div>
+    <div class="method-summary">returns 3 random recipes (<span class="nickname">get3RandomRecipes</span>)</div>
+    <div class="method-notes">returns an array of 3 random recipes</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipePreview">RecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    data of 3 random recipes
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="recipesFullRecipeInfoIdIdsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /recipes/fullRecipeInfo/id/{ids}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">recipesFullRecipeInfoIdIdsGet</span>)</div>
+    <div class="method-notes">returns recipe&#x27;s full info from API</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">ids (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipeFull">RecipeFull</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "instructions" : "Mix greek yogurt, egg white & almond extract into a small bowl\nIn a separate bowl combine flour, baking soda, sugar, & salt\nCombine and whisk till evenly mixed\nFold in 1/3 cup cherries\nPlace 1/4-cup batter onto non-stick skillet and cook till bubbles start appearing through the top of the pancake and then flip. NOTE: Cook on medium heat and I flattened out my batter with the spatula to cook more evenly.\nAbout 1-2 minutes on each side\nFor sauce:\nIn a sauce pan add 1/2 cup whole pitted cherries and maple syrup. Set temperature on medium, and when it starts to simmer, set the temperature to low and cook until thick and bubbly. Its done about the same time your pancakes are.",
+  "servings" : 3,
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "ingredients" : [ "salt", 0.25, "tsp" ],
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "instructions" : "Mix greek yogurt, egg white & almond extract into a small bowl\nIn a separate bowl combine flour, baking soda, sugar, & salt\nCombine and whisk till evenly mixed\nFold in 1/3 cup cherries\nPlace 1/4-cup batter onto non-stick skillet and cook till bubbles start appearing through the top of the pancake and then flip. NOTE: Cook on medium heat and I flattened out my batter with the spatula to cook more evenly.\nAbout 1-2 minutes on each side\nFor sauce:\nIn a sauce pan add 1/2 cup whole pitted cherries and maple syrup. Set temperature on medium, and when it starts to simmer, set the temperature to low and cook until thick and bubbly. Its done about the same time your pancakes are.",
+  "servings" : 3,
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "ingredients" : [ "salt", 0.25, "tsp" ],
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful retrieved search results
+        
+    <h4 class="field-label">204</h4>
+    No recipe found for the param
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="recipesPreviewRecipeInfoIdIdsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /recipes/previewRecipeInfo/id/{ids}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">recipesPreviewRecipeInfoIdIdsGet</span>)</div>
+    <div class="method-notes">returns recipe&#x27;s preview info from API</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">ids (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipePreview">RecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    array of recipes preview info
+        
+    <h4 class="field-label">204</h4>
+    No reciepes found for the search params
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="recipesSearchQuerySearchQueryAmountNumGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /recipes/search/query/{searchQuery}/amount/{num}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">recipesSearchQuerySearchQueryAmountNumGet</span>)</div>
+    <div class="method-notes">Serach for a recipie in the spoonacular API, using a search query. Will return results according to number param.  Can filter resutld by Cusine, diet, intolerance.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">searchQuery (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; The search query for searching a query in the API </div>      <div class="param">num (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Number of search resultls to retrieve </div>    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">cuisine (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">diet (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>      <div class="param">intolerances (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash;  </div>    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipePreview">RecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successful retrieved search results
+        
+    <h4 class="field-label">204</h4>
+    No recieps found for the search params
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="User">User</a></h1>
+  <div class="method"><a name="userAddFavRecipePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/addFavRecipe</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userAddFavRecipePost</span>)</div>
+    <div class="method-notes">add recipe to user&#x27;s favorite recipes</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>applocation/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#body_1">body_1</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    favorite recipe added
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    parameters missing
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userAddSeenRecipePost"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/addSeenRecipe</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userAddSeenRecipePost</span>)</div>
+    <div class="method-notes">add recipe to user&#x27;s seen recipes</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>applocation/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#body_2">body_2</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+                </div>  <!-- field-items -->
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    seen recipe added
+        <a href="#"></a>
+    <h4 class="field-label">401</h4>
+    parameters missing
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userLast3SeenRecipesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/last3SeenRecipes</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userLast3SeenRecipesGet</span>)</div>
+    <div class="method-notes">Get the user&#x27;s last seen recipes (3)</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipePreview">RecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    array of the seen recipes
+        
+    <h4 class="field-label">401</h4>
+    no seen recipes
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userMyFamilyRecipeFullIdIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/myFamilyRecipeFull/id/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userMyFamilyRecipeFullIdIdGet</span>)</div>
+    <div class="method-notes">Get the preview info of the user&#x27;s family recipes</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Recipe id </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#FamilyRecipeFull">FamilyRecipeFull</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "recipeName" : "pizza",
+  "instructions" : [ 1, "mix flour and water" ],
+  "recipeOwner" : "Savta Sara",
+  "whenUsuallyMakeRecipe" : "winter dinner",
+  "recipe_id" : "12",
+  "urlPic" : "urlPic",
+  "ingredients" : [ "flour", 2, "cups" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    full info of family recipe
+        <a href="#FamilyRecipeFull">FamilyRecipeFull</a>
+    <h4 class="field-label">401</h4>
+    user doesnt have this recipe id
+        <a href="#"></a>
+    <h4 class="field-label">402</h4>
+    parameters missing
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userMyFamilyRecipesPreviewGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/myFamilyRecipesPreview</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userMyFamilyRecipesPreviewGet</span>)</div>
+    <div class="method-notes">Get the user&#x27;s family recipes preview info</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#FamilyRecipePreview">FamilyRecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "recipeName" : "pizza",
+  "recipeOwner" : "Savta Sara",
+  "whenUsuallyMakeRecipe" : "winter dinner",
+  "recipe_id" : "12",
+  "urlPic" : "urlPic"
+}, {
+  "recipeName" : "pizza",
+  "recipeOwner" : "Savta Sara",
+  "whenUsuallyMakeRecipe" : "winter dinner",
+  "recipe_id" : "12",
+  "urlPic" : "urlPic"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    array of the personal recipes
+        
+    <h4 class="field-label">401</h4>
+    no family recipes
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userMyFavRecipesGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/myFavRecipes</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userMyFavRecipesGet</span>)</div>
+    <div class="method-notes">Get the preview info of the user&#x27;s favorite recipes</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RecipePreview">RecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+}, {
+  "readyInMinutes" : 45,
+  "image" : "https://spoonacular.com/recipeImages/637776-556x370.jpg",
+  "vegetarian" : false,
+  "glutenFree" : true,
+  "id" : 12,
+  "vegan" : true,
+  "title" : "pizza",
+  "aggregateLikes" : 102
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    array of the favorite recipes
+        
+    <h4 class="field-label">401</h4>
+    no favorite recipes
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userMyPersonalRecipeFullIdIdGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/myPersonalRecipeFull/id/{id}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userMyPersonalRecipeFullIdIdGet</span>)</div>
+    <div class="method-notes">gets the full info on the users specific personal recipe</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Recipe id </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#PersonalRecipeFull">PersonalRecipeFull</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "recipeName" : "pizza",
+  "instructions" : [ 1, "mix flour and water" ],
+  "recipe_id" : "12",
+  "urlPic" : "urlPic",
+  "isVegetarian" : true,
+  "glutenFree" : true,
+  "ingredients" : [ "flour", 2, "cups" ],
+  "isVegan" : true,
+  "prepTime" : 45,
+  "numOfMeals" : 2
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Object with the user info
+        <a href="#PersonalRecipeFull">PersonalRecipeFull</a>
+    <h4 class="field-label">401</h4>
+    user doesnt have this recipe id
+        <a href="#"></a>
+    <h4 class="field-label">402</h4>
+    parameters missing
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userMyPersonalRecipesPreviewGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/myPersonalRecipesPreview</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userMyPersonalRecipesPreviewGet</span>)</div>
+    <div class="method-notes">Get the user&#x27;s peronal recipes preview info</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#PersonalRecipePreview">PersonalRecipePreview</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "recipeName" : "pizza",
+  "recipe_id" : "12",
+  "urlPic" : "urlPic",
+  "isVegetarian" : true,
+  "glutenFree" : true,
+  "isVegan" : true,
+  "prepTime" : 45
+}, {
+  "recipeName" : "pizza",
+  "recipe_id" : "12",
+  "urlPic" : "urlPic",
+  "isVegetarian" : true,
+  "glutenFree" : true,
+  "isVegan" : true,
+  "prepTime" : 45
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    array of the personal recipes
+        
+    <h4 class="field-label">401</h4>
+    no personal recipes
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userRecipeInfoIdIdsGet"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/recipeInfo/id/{ids}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">userRecipeInfoIdIdsGet</span>)</div>
+    <div class="method-notes">Get the user&#x27;s app info on recipes by their ids</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">ids (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Recipe ids array </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      map[String, Object]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "23" : {
+    "watched" : true,
+    "saved" : false
+  }
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Object with the user info foreach of the sended ids
+        
+    <h4 class="field-label">402</h4>
+    parameters missing
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Cuisine"><code>Cuisine</code></a></li>
+    <li><a href="#Diet"><code>Diet</code></a></li>
+    <li><a href="#FamilyRecipeFull"><code>FamilyRecipeFull</code></a></li>
+    <li><a href="#FamilyRecipePreview"><code>FamilyRecipePreview</code></a></li>
+    <li><a href="#Intolerances"><code>Intolerances</code></a></li>
+    <li><a href="#PersonalRecipeFull"><code>PersonalRecipeFull</code></a></li>
+    <li><a href="#PersonalRecipeFull_ingredients"><code>PersonalRecipeFull_ingredients</code></a></li>
+    <li><a href="#PersonalRecipeFull_instructions"><code>PersonalRecipeFull_instructions</code></a></li>
+    <li><a href="#PersonalRecipePreview"><code>PersonalRecipePreview</code></a></li>
+    <li><a href="#RecipeFull"><code>RecipeFull</code></a></li>
+    <li><a href="#RecipeFull_ingredients"><code>RecipeFull_ingredients</code></a></li>
+    <li><a href="#RecipePreview"><code>RecipePreview</code></a></li>
+    <li><a href="#User"><code>User</code></a></li>
+    <li><a href="#body"><code>body</code></a></li>
+    <li><a href="#body_1"><code>body_1</code></a></li>
+    <li><a href="#body_2"><code>body_2</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Cuisine"><code>Cuisine</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Diet"><code>Diet</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FamilyRecipeFull"><code>FamilyRecipeFull</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">recipeName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">recipeOwner (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe owner </div>
+          <div class="param-desc"><span class="param-type">example: Savta Sara</span></div>
+<div class="param">urlPic (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+<div class="param">whenUsuallyMakeRecipe (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> when the owner usually makes this recipe </div>
+          <div class="param-desc"><span class="param-type">example: winter dinner</span></div>
+<div class="param">ingredients (optional)</div><div class="param-desc"><span class="param-type"><a href="#PersonalRecipeFull_ingredients">array[PersonalRecipeFull_ingredients]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;flour&quot;,2,&quot;cups&quot;]</span></div>
+<div class="param">instructions (optional)</div><div class="param-desc"><span class="param-type"><a href="#PersonalRecipeFull_instructions">array[PersonalRecipeFull_instructions]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [1,&quot;mix flour and water&quot;]</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FamilyRecipePreview"><code>FamilyRecipePreview</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">recipeName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">recipeOwner (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe owner </div>
+          <div class="param-desc"><span class="param-type">example: Savta Sara</span></div>
+<div class="param">urlPic (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+<div class="param">whenUsuallyMakeRecipe (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> when the owner usually makes this recipe </div>
+          <div class="param-desc"><span class="param-type">example: winter dinner</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Intolerances"><code>Intolerances</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PersonalRecipeFull"><code>PersonalRecipeFull</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">recipeName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">urlPic (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+<div class="param">prepTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the time in minutes it takes to make the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 45</span></div>
+<div class="param">isVegetarian (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">isVegan (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">glutenFree (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">numOfMeals (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 2</span></div>
+<div class="param">ingredients (optional)</div><div class="param-desc"><span class="param-type"><a href="#PersonalRecipeFull_ingredients">array[PersonalRecipeFull_ingredients]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;flour&quot;,2,&quot;cups&quot;]</span></div>
+<div class="param">instructions (optional)</div><div class="param-desc"><span class="param-type"><a href="#PersonalRecipeFull_instructions">array[PersonalRecipeFull_instructions]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [1,&quot;mix flour and water&quot;]</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PersonalRecipeFull_ingredients"><code>PersonalRecipeFull_ingredients</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">ingredient (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">amount (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">measuringUnit (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PersonalRecipeFull_instructions"><code>PersonalRecipeFull_instructions</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">number (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PersonalRecipePreview"><code>PersonalRecipePreview</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">recipeName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">urlPic (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+<div class="param">prepTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the time in minutes it takes to make the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 45</span></div>
+<div class="param">isVegetarian (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">isVegan (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">glutenFree (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RecipeFull"><code>RecipeFull</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">readyInMinutes (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the time in minutes it takes to make the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 45</span></div>
+<div class="param">aggregateLikes (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the num of score likes of the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 102</span></div>
+<div class="param">vegetarian (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is vegetarian (true) or not vegetarian (false) </div>
+          <div class="param-desc"><span class="param-type">example: false</span></div>
+<div class="param">vegan (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is vegan (true) or not vegan (false) </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">glutenFree (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is glutenFree (true) or not glutenFree (false) </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+          <div class="param-desc"><span class="param-type">example: https://spoonacular.com/recipeImages/637776-556x370.jpg</span></div>
+<div class="param">ingredients (optional)</div><div class="param-desc"><span class="param-type"><a href="#RecipeFull_ingredients">array[RecipeFull_ingredients]</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: [&quot;salt&quot;,0.25,&quot;tsp&quot;]</span></div>
+<div class="param">instructions (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The reciepe instructions </div>
+          <div class="param-desc"><span class="param-type">example: Mix greek yogurt, egg white &amp; almond extract into a small bowl
+In a separate bowl combine flour, baking soda, sugar, &amp; salt
+Combine and whisk till evenly mixed
+Fold in 1/3 cup cherries
+Place 1/4-cup batter onto non-stick skillet and cook till bubbles start appearing through the top of the pancake and then flip. NOTE: Cook on medium heat and I flattened out my batter with the spatula to cook more evenly.
+About 1-2 minutes on each side
+For sauce:
+In a sauce pan add 1/2 cup whole pitted cherries and maple syrup. Set temperature on medium, and when it starts to simmer, set the temperature to low and cook until thick and bubbly. Its done about the same time your pancakes are.</span></div>
+<div class="param">servings (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The num of meals in this recipe </div>
+          <div class="param-desc"><span class="param-type">example: 3</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RecipeFull_ingredients"><code>RecipeFull_ingredients</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The name of ingredient </div>
+<div class="param">amount (optional)</div><div class="param-desc"><span class="param-type"><a href="#BigDecimal">BigDecimal</a></span> The amount of ingredient </div>
+<div class="param">unit (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The unit of ingredient </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RecipePreview"><code>RecipePreview</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> The reciepe identifier, returned for further processing and actions on recipes </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The recipe title </div>
+          <div class="param-desc"><span class="param-type">example: pizza</span></div>
+<div class="param">readyInMinutes (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the time in minutes it takes to make the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 45</span></div>
+<div class="param">aggregateLikes (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> the num of score likes of the recipe </div>
+          <div class="param-desc"><span class="param-type">example: 102</span></div>
+<div class="param">vegetarian (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is vegetarian (true) or not vegetarian (false) </div>
+          <div class="param-desc"><span class="param-type">example: false</span></div>
+<div class="param">vegan (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is vegan (true) or not vegan (false) </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">glutenFree (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> sign if recipe is glutenFree (true) or not glutenFree (false) </div>
+          <div class="param-desc"><span class="param-type">example: true</span></div>
+<div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The url of the recipe&#x27;s picture </div>
+          <div class="param-desc"><span class="param-type">example: https://spoonacular.com/recipeImages/637776-556x370.jpg</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="User"><code>User</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">user_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: 12</span></div>
+<div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: adiavinun</span></div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: adi123</span></div>
+<div class="param">firstname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Adi</span></div>
+<div class="param">lastname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Avinun</span></div>
+<div class="param">country (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Israel</span></div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: adiavinun@gmail.com</span></div>
+<div class="param">urlPic (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: https://www.pngitem.com/pimgs/m/401-4011546_costume-clipart-dress-up-girl-clipart-png-transparent.png</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="body"><code>body</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Contains only letters </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Contains letters with at least 1 numerical character and 1 special characters </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="body_1"><code>body_1</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="body_2"><code>body_2</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">recipe_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

@@ -8,4 +8,5 @@ CREATE TABLE [dbo].[users](
 	[email] [varchar] (300) NOT NULL,
 	[urlPic] [varchar] (300) NOT NULL
 )
+Select * from users
 

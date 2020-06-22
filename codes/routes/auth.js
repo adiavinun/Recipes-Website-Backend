@@ -1,24 +1,24 @@
 var express = require("express");
 var router = express.Router();
 const DButils = require("../routes/utils/DButils");
+const authUtils = require("./utils/authUtils.js");
 const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res, next) => {
     try {
-      const users = await DButils.execQuery("SELECT username FROM dbo.users");
+      const users = await authUtils.selectUsernames();
 
       if (users.find((x) => x.username === req.body.username))
-        throw { status: 409, message: "Username taken" };
+        throw { status: 409, message: "username already exists" };
 
       // add the new username
       let hash_password = bcrypt.hashSync(
         req.body.password,
         parseInt("13")
       );
-      await DButils.execQuery(
-        `INSERT INTO dbo.users (user_id, username, password, firstname, lastname, country, email, urlPic) 
-        VALUES (default, '${req.body.username}', '${hash_password}', '${req.body.firstname}', '${req.body.lastname}', '${req.body.country}', '${req.body.email}', '${req.body.urlPic}');`
-        );
+
+      await authUtils.addUser(req.body.username, hash_password, req.body.firstname, req.body.lastname, req.body.country, req.body.email, req.body.urlPic);
+
       res.status(201).send({ message: "user created", success: true });
     } catch (error) {
       next(error);
@@ -30,17 +30,13 @@ router.post("/register", async (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   try {
     // check that username exists
-    const users = await DButils.execQuery("SELECT username FROM dbo.users");
+    const users = await authUtils.selectUsernames();
     if (!users.find((x) => x.username === req.body.username))
       throw { status: 401, message: "Username or Password incorrect" };
 
-    const user = (
-      await DButils.execQuery(
-        `SELECT * FROM dbo.users WHERE username = '${req.body.username}'`
-      )
-    )[0];
+    const user = await authUtils.findUser(req.body.username);
 
-        // check that the password is correct
+    // check that the password is correct
 
     if (!bcrypt.compareSync(req.body.password, user.password)) {
       throw { status: 401, message: "Username or Password incorrect" };
