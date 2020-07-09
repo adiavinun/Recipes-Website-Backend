@@ -239,22 +239,29 @@ function getInstructions(fullInstructions) {
  */
 function getIngredients(extendedIngredients){
     //let dic = {};
-    return extendedIngredients.map((ingredients) => {
-        const {
-            name,
-            amount,
-            unit,
-        } = ingredients;
-        //var inside = {
-        return {
-            name: name,
-            amount: amount,
-            unit: unit,           
-        }
+    //return extendedIngredients.map((ingredients) => {
+        let original;
+        let ingredientArray = [];
+    for (var i = 0; i < extendedIngredients; i++){
+        original = extendedIngredients[i].original;
+        ingredientArray.push({original:original})
+
+    }
+        // const {
+        //     name,
+        //     amount,
+        //     unit,
+        // } = ingredients;
+        // //var inside = {
+        // return {
+        //     name: name,
+        //     amount: amount,
+        //     unit: unit,           
+        // }
         //var ingredientsName = ingredients.name;
         //dic [ingredientsName] = new Object();
         //dic [ingredientsName] = inside;
-    });
+    //});
     //return dic;
 }
 
