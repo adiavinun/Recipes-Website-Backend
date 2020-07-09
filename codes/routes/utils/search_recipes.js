@@ -192,33 +192,33 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
     return recipes_Info.map((record) => {
          // for each cell in map (recipe) extract relevant information with keys
         const {
-            id,
-            title,
-            readyInMinutes,
-            aggregateLikes,
-            vegetarian,
-            vegan,
-            glutenFree,
-            image,
-            extendedIngredients,
-            instructions,
-            servings,
+          id,
+          title,
+          readyInMinutes,
+          aggregateLikes,
+          vegetarian,
+          vegan,
+          glutenFree,
+          image,
+          extendedIngredients,
+          analyzedInstructions,
+          servings,
         } = record.data;
         // return for each the rekecant information
         //var inside = {
         return {
-            id: id,
-            title: title,
-            readyInMinutes: readyInMinutes,
-            aggregateLikes: aggregateLikes,
-            vegetarian: vegetarian,
-            vegan: vegan,
-            glutenFree: glutenFree,
-            image: image,
-            Ingredients: getIngrediants(extendedIngredients),
-            instructions: instructions,
-            servings: servings,
-        }
+          id: id,
+          title: title,
+          readyInMinutes: readyInMinutes,
+          aggregateLikes: aggregateLikes,
+          vegetarian: vegetarian,
+          vegan: vegan,
+          glutenFree: glutenFree,
+          image: image,
+          Ingredients: getIngredients(extendedIngredients),
+          instructions: getInstructions(analyzedInstructions),
+          servings: servings,
+        };
         //var recipeID = record.data.id;
         ////dic [recipeID] = new Object();
         //dic [recipeID] = inside;
@@ -226,11 +226,18 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
     //return dic;
 }
 
+function getInstructions(fullInstructions) {
+    let steps = fullInstructions[0].steps;
+    let stepsArray = [];
+    steps.map((step) => stepsArray.push(step.step));
+    return stepsArray;
+}
+
 /**
  * 
  * @param {*} extendedIngredients 
  */
-function getIngrediants(extendedIngredients){
+function getIngredients(extendedIngredients){
     //let dic = {};
     return extendedIngredients.map((ingredients) => {
         const {
