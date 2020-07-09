@@ -215,7 +215,7 @@ function extractSearchResultsData_fullRecipe(recipes_Info){
           vegan: vegan,
           glutenFree: glutenFree,
           image: image,
-          Ingredients: getIngredients(extendedIngredients),
+          ingredients: getIngredients(extendedIngredients),
           instructions: getInstructions(analyzedInstructions),
           servings: servings,
         };
