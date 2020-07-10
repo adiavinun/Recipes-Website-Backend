@@ -8,13 +8,13 @@ CREATE TABLE [dbo].[personalRecipes](
 	[vegetarian] [BIT] NOT NULL,
 	[glutenFree] [BIT] NOT NULL,
 	--[instructions] [varchar](300) NOT NULL,
-	[numOfMeals] [int] NOT NULL,
+	[servings] [int] NOT NULL,
 	--[ingredients] [varchar](MAX) NOT NULL,
 	--[numOfLikes] [int](300),
 	PRIMARY KEY (id),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
-EXEC sp_RENAME 'personalInstructions.recipe_id', 'id', 'COLUMN'
+EXEC sp_RENAME 'personalRecipes.numOfMeals', 'servings', 'COLUMN'
 select * from personalIngredients
 
 CREATE TABLE [dbo].[personalIngredients](

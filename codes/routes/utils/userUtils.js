@@ -69,7 +69,7 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
   try {
     var myPersRec = (
       await DButils.execQuery(
-        `SELECT id, title, image, readyInMinutes, vegan, vegetarian, glutenFree, numOfMeals
+        `SELECT id, title, image, readyInMinutes, vegan, vegetarian, glutenFree, servings
             FROM dbo.personalRecipes WHERE author= '${user_id}' AND id= '${recipe_id}'`
       )
     )[0];
