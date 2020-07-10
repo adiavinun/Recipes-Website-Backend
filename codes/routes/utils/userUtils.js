@@ -6,12 +6,12 @@ async function getUserInfoOnRecipes(user_id, idArray) {
   var saved = false;
   var watchedRecipes = (
     await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.lastSeen WHERE author= '${user_id}'`
+      `SELECT id FROM dbo.lastSeen WHERE author= '${user_id}'`
     )
   );
   var savedRecipes = (
     await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.favoriteRecipes WHERE author= '${user_id}'`
+      `SELECT id FROM dbo.favoriteRecipes WHERE author= '${user_id}'`
     )
   );
   var i;
@@ -36,7 +36,7 @@ async function getUserInfoOnRecipes(user_id, idArray) {
 function checkIfRecipeInside(recipeList, recId) {
   var i;
   for (i = 0; i < recipeList.length; i++) {
-    if (recipeList[i].recipe_id == recId) {
+    if (recipeList[i].id == recId) {
       return "true";
     }
   }
@@ -49,7 +49,7 @@ async function getMyPersonalRecipesPreview(user_id) {
 
   let myPersRec = (
     await DButils.execQuery(
-      `SELECT recipe_id, title, image, readyInMinutes, vegan, vegetarian, glutenFree 
+      `SELECT id, title, image, readyInMinutes, vegan, vegetarian, glutenFree 
           FROM dbo.personalRecipes WHERE author= '${user_id}'`
     )
   );
@@ -69,8 +69,8 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
   try {
     var myPersRec = (
       await DButils.execQuery(
-        `SELECT recipe_id, title, image, readyInMinutes, vegan, vegetarian, glutenFree, numOfMeals
-            FROM dbo.personalRecipes WHERE author= '${user_id}' AND recipe_id= '${recipe_id}'`
+        `SELECT id, title, image, readyInMinutes, vegan, vegetarian, glutenFree, numOfMeals
+            FROM dbo.personalRecipes WHERE author= '${user_id}' AND id= '${recipe_id}'`
       )
     )[0];
     if (!myPersRec) {
@@ -78,12 +78,12 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
     }
     let personalIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT ingredient, amount, measuringUnit FROM dbo.personalIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let personalInstructions = (
       await DButils.execQuery(
-        `SELECT number, description FROM dbo.personalInstructions WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT number, description FROM dbo.personalInstructions WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     myPersRec.ingredients = personalIngredients;
@@ -117,7 +117,7 @@ async function getMyFamilyRecipesFull(user_id, recipe_id) {
   try {
     var myFamRec = (
       await DButils.execQuery(
-        `SELECT * FROM dbo.familyRecipes WHERE author= '${user_id}' AND recipe_id= '${recipe_id}'`
+        `SELECT * FROM dbo.familyRecipes WHERE author= '${user_id}' AND id= '${recipe_id}'`
       )
     )[0];
     if (!myFamRec) {
@@ -125,12 +125,12 @@ async function getMyFamilyRecipesFull(user_id, recipe_id) {
     }
     let familyIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let familyInstructions = (
       await DButils.execQuery(
-        `SELECT number, description FROM dbo.familyInstructions WHERE recipe_id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT number, description FROM dbo.familyInstructions WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     myFamRec.ingredients = familyIngredients;
@@ -147,7 +147,7 @@ async function getMyFavRecipesID(user_id) {
 
   let myFavRec = (
     await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.favoriteRecipes WHERE author= '${user_id}'`
+      `SELECT id FROM dbo.favoriteRecipes WHERE author= '${user_id}'`
     )
   );
   if (!myFavRec) {
@@ -155,7 +155,7 @@ async function getMyFavRecipesID(user_id) {
   }
   let favRecipesIDArr = [];
   for (i = 0; i < myFavRec.length; i++) {
-    favRecipesIDArr.push(myFavRec[i].recipe_id);
+    favRecipesIDArr.push(myFavRec[i].id);
   }
   return (favRecipesIDArr);
 }
@@ -163,12 +163,12 @@ async function getMyFavRecipesID(user_id) {
 async function addFavRecipe(user_id, recipe_id) {
   let favRecipe = (
     await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.favoriteRecipes WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
+      `SELECT id FROM dbo.favoriteRecipes WHERE id= '${recipe_id}' AND author= '${user_id}'`
     )
   );
   if (!favRecipe || favRecipe.length == 0) {
     await DButils.execQuery(
-      `INSERT INTO dbo.favoriteRecipes (recipe_id, author) VALUES ('${recipe_id}','${user_id}');`
+      `INSERT INTO dbo.favoriteRecipes (id, author) VALUES ('${recipe_id}','${user_id}');`
     );
   }
 }
@@ -180,7 +180,7 @@ async function getLast3SeenRecipes(user_id) {
 
   let lastSeenRecipes = (
     await DButils.execQuery(
-      `SELECT TOP 3 recipe_id FROM dbo.lastSeen WHERE author= '${user_id}' ORDER BY time DESC`
+      `SELECT TOP 3 id FROM dbo.lastSeen WHERE author= '${user_id}' ORDER BY time DESC`
     )
   );
   if (!lastSeenRecipes) {
@@ -188,7 +188,7 @@ async function getLast3SeenRecipes(user_id) {
   }
   let lastSeenRecipesArr = [];
   for (var i = 0; i < lastSeenRecipes.length; i++) {
-    lastSeenRecipesArr.push(lastSeenRecipes[i].recipe_id);
+    lastSeenRecipesArr.push(lastSeenRecipes[i].id);
   }
   return (lastSeenRecipesArr);
 }
@@ -196,16 +196,16 @@ async function getLast3SeenRecipes(user_id) {
 async function addSeenRecipe(user_id, recipe_id) {
   let lastSeenRecipes = (
     await DButils.execQuery(
-      `SELECT recipe_id FROM dbo.lastSeen WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
+      `SELECT id FROM dbo.lastSeen WHERE id= '${recipe_id}' AND author= '${user_id}'`
     )
   );
   if (lastSeenRecipes && lastSeenRecipes.length > 0) {
     await DButils.execQuery(
-      `DELETE FROM dbo.lastSeen WHERE recipe_id= '${recipe_id}' AND author= '${user_id}'`
+      `DELETE FROM dbo.lastSeen WHERE id= '${recipe_id}' AND author= '${user_id}'`
     );
   }
   await DButils.execQuery(
-    `INSERT INTO dbo.lastSeen (recipe_id, author) VALUES ('${recipe_id}','${user_id}');`
+    `INSERT INTO dbo.lastSeen (id, author) VALUES ('${recipe_id}','${user_id}');`
   );
 }
 
