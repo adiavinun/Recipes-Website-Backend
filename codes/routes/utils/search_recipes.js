@@ -4,7 +4,10 @@ const axios = require("axios");
 const api_domain = "https://api.spoonacular.com/recipes";
 //const api_key ="apiKey=25f5d3453750479f9213ccf1db014d32"; //user of adi and this is what we used
 //const api_key ="apiKey=48929028c64b427fa9389ef953df7223"; //user of nicole
-const api_key = "apiKey=77c6f285cd4c4c71b6b147ce93af5588"; 
+//const api_key = "apiKey=77c6f285cd4c4c71b6b147ce93af5588"; 
+const api_key = "apiKey=90acb7a8bdb34eb7b44135cce26150cc"; 
+
+
 
 
 /**
