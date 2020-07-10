@@ -78,7 +78,7 @@ async function getMyPersonalRecipeFull(user_id, recipe_id) {
     }
     let personalIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, nameAndAmount FROM dbo.personalIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT nameAndAmount FROM dbo.personalIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let personalInstructions = (
