@@ -125,7 +125,7 @@ async function getMyFamilyRecipesFull(user_id, recipe_id) {
     }
     let familyIngredients = (
       await DButils.execQuery(
-        `SELECT ingredient, amount, measuringUnit FROM dbo.familyIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
+        `SELECT nameAndAmount FROM dbo.familyIngredients WHERE id= '${recipe_id}' ORDER BY number ASC`
       )
     );
     let familyInstructions = (

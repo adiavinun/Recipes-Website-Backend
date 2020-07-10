@@ -51,10 +51,8 @@ EXEC sp_RENAME 'favoriteRecipes.recipe_id', 'id', 'COLUMN'
 CREATE TABLE [dbo].[familyIngredients](
 	[id] [varchar](300) NOT NULL,
 	[number] [int] NOT NULL,
-	[ingredient] [varchar](300) NOT NULL,
-	[amount] [varchar](300) NOT NULL,
-	[measuringUnit] [varchar](300) NOT NULL,
-	PRIMARY KEY (id, ingredient),
+	[nameAndAmount] [varchar](300) NOT NULL,
+	PRIMARY KEY (id, nameAndAmount),
 	FOREIGN KEY (id) REFERENCES familyRecipes(id)
 )
 select * from familyInstructions

@@ -2,14 +2,14 @@
 
 Insert into familyRecipes values (21, 'e54d4785-6620-4d28-aa73-dc8c58625cb8', 'Cheesecake', 'Savta Sara', 'Shavuot', 'https://img.mako.co.il/2011/05/25/1234_c.jpg');
 
-Insert into familyIngredients values (21, 1, 'self rising flour', '3', 'cups');
-Insert into familyIngredients values (21, 2, 'butter', '200', 'grams');
-Insert into familyIngredients values (21, 3, 'eggs', '2', '');
-Insert into familyIngredients values (21, 4, 'sugar', '1/2', 'cup');
-Insert into familyIngredients values (21, 5, 'sweet cream', '500', 'ml');
-Insert into familyIngredients values (21, 6, 'cream cheese', '1', '');
-Insert into familyIngredients values (21, 7, 'vanilla sugar', '1', '');
-Insert into familyIngredients values (21, 8, 'Instant Pudding - Vanilla', '1', 'tablespoon');
+Insert into familyIngredients values (21, 1, '3 cups self rising flour');
+Insert into familyIngredients values (21, 2, '200 grams butter');
+Insert into familyIngredients values (21, 3, '2 eggs');
+Insert into familyIngredients values (21, 4, '1/2 cup sugar');
+Insert into familyIngredients values (21, 5, '500  ml sweet cream');
+Insert into familyIngredients values (21, 6, '1 cream cheese');
+Insert into familyIngredients values (21, 7, '1 vanilla sugar');
+Insert into familyIngredients values (21, 8, '1 tablespoon Instant Pudding - Vanilla');
 
 Insert into familyInstructions values (21, 1, 'Mix together the flour, butter, eggs and sugar, until it forms into dough. Bake the dough in a pan at 180 degrees celsius for about 30 minutes.');
 Insert into familyInstructions values (21, 2, 'Let the dough cool, and scrape the top layer and set the crumbs aside for later.');
@@ -20,18 +20,18 @@ Insert into familyInstructions values (21, 4, 'Pour the filling over the baked d
 
 Insert into familyRecipes values (22, 'e54d4785-6620-4d28-aa73-dc8c58625cb8', 'Chinese Chicken Salad', 'Dafna Avinun', 'Holiday Dinners', 'https://food-fanatic-res.cloudinary.com/iu/s--aePeng2Q--/c_thumb,f_auto,g_auto,h_1200,q_auto,w_1200/v1562344462/chinese-chicken-salad-photo');
 
-Insert into familyIngredients values (22, 1, 'sugar', '3', 'tablespoons');
-Insert into familyIngredients values (22, 2, 'rice vinegar', '4', 'tablespoons');
-Insert into familyIngredients values (22, 3, 'sesame oil', '2', 'tablespoons');
-Insert into familyIngredients values (22, 4, 'salt', '1', 'teaspoon');
-Insert into familyIngredients values (22, 5, 'pepper', '1/2', 'teaspoon');
-Insert into familyIngredients values (22, 6, 'canola oil', '1/2', 'cup');
-Insert into familyIngredients values (22, 7, 'mustard', '2', 'teaspoons');
-Insert into familyIngredients values (22, 8, 'chicken breast', '3', '');
-Insert into familyIngredients values (22, 9, 'iceberg lettuce or green cabbage', '700', 'grams');
-Insert into familyIngredients values (22, 10, 'green onions, chopped', '5', '');
-Insert into familyIngredients values (22, 11, 'toasted silvered almonds', '1/2', 'cup');
-Insert into familyIngredients values (22, 12, 'toasted sesame seeds', '1/4', 'cup');
+Insert into familyIngredients values (22, 1, '3 tablespoons sugar');
+Insert into familyIngredients values (22, 2, '4 tablespoons rice vinegar');
+Insert into familyIngredients values (22, 3, '2 tablespoons sesame oil');
+Insert into familyIngredients values (22, 4, '1 teaspoon salt');
+Insert into familyIngredients values (22, 5, '1/2 teaspoon pepper');
+Insert into familyIngredients values (22, 6, '1/2 cup canola oil');
+Insert into familyIngredients values (22, 7, '2 teaspoons mustard');
+Insert into familyIngredients values (22, 8, '3 chicken breast');
+Insert into familyIngredients values (22, 9, '700 grams iceberg lettuce or green cabbage');
+Insert into familyIngredients values (22, 10, '5 green onions, chopped');
+Insert into familyIngredients values (22, 11, '1/2 cup toasted silvered almonds');
+Insert into familyIngredients values (22, 12, '1/4 cup toasted sesame seeds');
 
 Insert into familyInstructions values (22, 1, 'Cook chicken breast in ginger and shred when cool.');
 Insert into familyInstructions values (22, 2, 'Combine the dressing ingredients in a jar and shake.');
@@ -41,13 +41,13 @@ Insert into familyInstructions values (22, 3, 'Place the Salad ingredients toget
 
 Insert into familyRecipes values (23, 'e54d4785-6620-4d28-aa73-dc8c58625cb8', 'Potato Pierogi', 'Savta Mania', 'All year', 'https://res.cloudinary.com/orthodox-union/image/fetch/c_fill,f_auto/https://oukosher.org/content/uploads/2007/05/Potato-and-Jalapeno-Pierogi.jpg');
 
-Insert into familyIngredients values (23, 1, 'flour', '1', 'kg');
-Insert into familyIngredients values (23, 2, 'warm water', '2', 'cups');
-Insert into familyIngredients values (23, 3, 'oil', '3', 'tablespoons');
-Insert into familyIngredients values (23, 4, 'salt', '1', 'teaspoon');
-Insert into familyIngredients values (23, 5, 'eggs', '2', '');
-Insert into familyIngredients values (23, 6, 'potatoes – boiled and mashed', '1', 'kg');
-Insert into familyIngredients values (23, 7, 'onions', '2', '');
+Insert into familyIngredients values (23, 1, '1 kg flour');
+Insert into familyIngredients values (23, 2, '2 cups warm water');
+Insert into familyIngredients values (23, 3, '3 tablespoons oil');
+Insert into familyIngredients values (23, 4, '1 teaspoon salt');
+Insert into familyIngredients values (23, 5, '2 eggs');
+Insert into familyIngredients values (23, 6, '1 kg potatoes – boiled and mashed');
+Insert into familyIngredients values (23, 7, '2 onions');
 
 Insert into familyInstructions values (23, 1, 'Mix flour, salt, oil, and water. When the dough cools down slowly add the eggs');
 Insert into familyInstructions values (23, 2, 'Saute the onions, mash the potatoes and mix together with salt and pepper.');
