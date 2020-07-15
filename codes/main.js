@@ -15,8 +15,11 @@ app.use(
     cookieName: "session", // the cookie key name
     secret: "secret", // the encryption key
     duration: 600 * 60 * 1000, // expired after 600 minutes
-    activeDuration: 0 // if expiresIn < activeDuration,
+    activeDuration: 0, // if expiresIn < activeDuration,
     //the session will be extended by activeDuration milliseconds
+    cookie: {
+      httpOnly: false,
+    },
   })
 );
 app.use(express.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
