@@ -86,6 +86,7 @@ CREATE TABLE [dbo].[favoriteRecipes](
 	PRIMARY KEY (id, author),
 	FOREIGN KEY (author) REFERENCES users(user_id)
 )
-Insert into favoriteRecipes (recipe_id, author) values (492560, '9b6c41d7-009e-4994-801e-18a8bf440951');
-Insert into favoriteRecipes (recipe_id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
-Insert into favoriteRecipes (recipe_id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into favoriteRecipes (id, author) values (492560, '9b6c41d7-009e-4994-801e-18a8bf440951');
+Insert into favoriteRecipes (id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+Insert into favoriteRecipes (id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
+select * from favoriteRecipes
