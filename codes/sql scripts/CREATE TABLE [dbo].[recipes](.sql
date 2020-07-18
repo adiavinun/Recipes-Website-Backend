@@ -90,3 +90,5 @@ Insert into favoriteRecipes (id, author) values (492560, '9b6c41d7-009e-4994-801
 Insert into favoriteRecipes (id, author) values (559251, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
 Insert into favoriteRecipes (id, author) values (630293, 'e54d4785-6620-4d28-aa73-dc8c58625cb8');
 select * from favoriteRecipes
+
+drop table lastSeen
