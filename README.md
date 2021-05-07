@@ -6,6 +6,3 @@
 
 ## API:
 https://app.swaggerhub.com/apis/adiavinun/API_recipes/1.0.0#/
-
-## GIT:
-https://github.com/SISE-Web-Development-Environments/assignment-3-2-adi_nicole.git
